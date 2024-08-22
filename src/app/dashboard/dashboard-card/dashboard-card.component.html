@@ -1,0 +1,13 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>{{ title }}</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <p>{{ description }}</p>
+    <div style="border-bottom: 1px solid black; margin-bottom: 20px;"></div>
+    <div style="display: flex; justify-content: center; margin-top: 20px;">
+      <ion-button color="warning" style="margin-right: 10px;" (click)="goToFlashcard('practice', courseId)">+ Practice</ion-button>
+      <ion-button color="warning" (click)="goToFlashcard('study', courseId)">- Study</ion-button>
+    </div>
+  </ion-card-content>
+</ion-card>

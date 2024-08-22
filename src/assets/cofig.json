@@ -1,0 +1,22 @@
+{
+    "courses": [
+      {
+        "id": "dsa",
+        "name": "Data Structures & Algorithms",
+        "components": {
+          "practice": "PracticeComponent",
+          "study": "StudyComponent"
+        },
+        "dataEndpoint": "/api/courses/dsa/data"
+      },
+      {
+        "id": "sql",
+        "name": "SQL & Databases",
+        "components": {
+          "practice": "PracticeComponent",
+          "study": "StudyComponent"
+        },
+        "dataEndpoint": "/api/courses/sql/data"
+      }
+    ]
+  }

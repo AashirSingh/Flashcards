@@ -1,0 +1,14 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>{{ question }}</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <div style="border-bottom: 1px solid white; margin-bottom: 20px;"></div>
+    <div *ngIf="showAnswer">{{ answer }}</div>
+    <div style="display: flex; justify-content: center; margin-top: 20px;">
+      <ion-button color="warning" (click)="toggleAnswer()" *ngIf="!showAnswer">+ Show Answer</ion-button>
+      <ion-button color="warning" (click)="toggleAnswer()" *ngIf="showAnswer">- Hide Answer</ion-button>
+    </div>
+  </ion-card-content>
+</ion-card>

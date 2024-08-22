@@ -1,0 +1,11 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Study Materials</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <div *ngFor="let material of studyMaterials">
+      <p>{{ material.content }}</p>
+    </div>
+  </ion-card-content>
+</ion-card>
