@@ -1,6 +1,11 @@
+<!-- src/app/dashboard/dashboard.page.html -->
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>Dashboard</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="openCreateCourseModal()">Create Course</ion-button>
+      <ion-button (click)="openEditCourseModal()">Edit Course</ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -8,6 +13,10 @@
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Dashboard</ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="openCreateCourseModal()">Create Course</ion-button>
+        <ion-button (click)="openEditCourseModal()">Edit Course</ion-button>
+      </ion-buttons>
     </ion-toolbar>
   </ion-header>
 
@@ -18,7 +27,7 @@
       </ion-card-header>
       <ion-card-content>
         <p>{{ course.description }}</p>
-        <ion-button (click)="goToFlashcard('practice', course.id)">Practice</ion-button>
+        <ion-button (click)="goToFlashcard('practice', course.id)">Flashcards</ion-button>
         <ion-button (click)="goToFlashcard('study', course.id)">Study</ion-button>
       </ion-card-content>
     </ion-card>

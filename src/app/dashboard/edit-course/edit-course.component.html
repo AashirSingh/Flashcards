@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Edit Course</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label>Course</ion-label>
+    <ion-select [(ngModel)]="selectedCourseId">
+      <ion-select-option *ngFor="let course of courses" [value]="course.id">
+        {{ course.name }}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">Question</ion-label>
+    <ion-input [(ngModel)]="newQuestion"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">Answer</ion-label>
+    <ion-input [(ngModel)]="newAnswer"></ion-input>
+  </ion-item>
+  <ion-button expand="block" (click)="addQuestionAndAnswer()">Add Question and Answer</ion-button>
+</ion-content>

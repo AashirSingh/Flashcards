@@ -1,16 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ConfigService } from '../config.service'; // Ensure this import path is correct
-
-interface Course {
-  id: string;
-  name: string;
-  description: string;
-  components: {
-    practice: any;
-    study: any;
-  };
-}
+import { ConfigService } from '../config.service';
+import { Course } from '../shared/models/course.model';
+import { EditCourseComponent } from './edit-course/edit-course.component';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,13 +15,21 @@ export class DashboardPage implements OnInit {
 
   constructor(
     private configService: ConfigService,
-    private router: Router
+    private router: Router,
+    private modalController: ModalController
   ) {}
+
+  async openEditCourseModal() {
+    const modal = await this.modalController.create({
+      component: EditCourseComponent,
+    });
+    return await modal.present();
+  }
 
   ngOnInit() {
     this.configService.getConfig().subscribe(data => {
       if (data && data.courses) {
-        this.courses = data.courses as Course[]; // Cast the response to an array of Course objects
+        this.courses = data.courses as Course[];
       } else {
         console.error('Courses data is missing in the config response.');
       }
@@ -36,7 +37,11 @@ export class DashboardPage implements OnInit {
   }
 
   goToFlashcard(mode: string, courseId: string) {
-    // Use router to navigate
     this.router.navigate(['/flashcard', mode, courseId]);
+  }
+
+   // Placeholder for opening create course modal
+   openCreateCourseModal() {
+    console.log('Open Create Course Modal');
   }
 }

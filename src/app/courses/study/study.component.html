@@ -2,10 +2,12 @@
   <ion-card-header>
     <ion-card-title>Study Materials</ion-card-title>
   </ion-card-header>
-
-  <ion-card-content>
-    <div *ngFor="let material of studyMaterials">
-      <p>{{ material.content }}</p>
-    </div>
-  </ion-card-content>
+  <ion-card *ngFor="let material of studyMaterials">
+    <ion-card-header>
+      <ion-card-title>{{ material.question }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>{{ material.answer }}</p>
+    </ion-card-content>
+  </ion-card>
 </ion-card>

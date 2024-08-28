@@ -1,12 +1,30 @@
-<ion-card>
-  <ion-card-header>
-    <ion-card-title>Practice: {{ questions[currentQuestionIndex].title }}</ion-card-title>
-  </ion-card-header>
-
-  <ion-card-content>
-    <div *ngFor="let answer of questions[currentQuestionIndex].answers">
-      <ion-button (click)="checkAnswer(answer)">{{ answer.text }}</ion-button>
+<ion-card (click)="toggleAnswer()" class="card-flip">
+  <div class="flip-container">
+    <div [class.flip]="showAnswer" class="flip">
+      <div class="card-front">
+        <ion-card-header>
+          <ion-card-title class="ion-text-center">{{ questions[currentQuestionIndex].question }}</ion-card-title>
+        </ion-card-header>
+      </div>
+      <div class="card-back">
+        <ion-card-header>
+          <ion-card-title class="ion-text-center">{{ questions[currentQuestionIndex].answer }}</ion-card-title>
+        </ion-card-header>
+      </div>
     </div>
-    <ion-button (click)="nextQuestion()">Next Question</ion-button>
-  </ion-card-content>
+  </div>
 </ion-card>
+<ion-row>
+  <ion-col size="6">
+    <ion-button expand="block" color="medium" [disabled]="currentQuestionIndex === 0" (click)="previousQuestion()">
+      <ion-icon slot="start" name="arrow-back"></ion-icon>
+      Previous
+    </ion-button>
+  </ion-col>
+  <ion-col size="6">
+    <ion-button expand="block" (click)="nextQuestion()">
+      Next
+      <ion-icon slot="end" name="arrow-forward"></ion-icon>
+    </ion-button>
+  </ion-col>
+</ion-row>
