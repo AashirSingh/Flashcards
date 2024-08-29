@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ConfigService } from '../../config.service';
-import { Course } from '../../shared/models/course.model'; // Ensure you have this import
+import { Course } from '../../shared/models/course.model';
 import { Set } from '../../shared/models/set.model';
 
 @Component({
@@ -20,7 +20,7 @@ export class PracticeComponent implements OnInit {
     this.configService.getConfig().subscribe(config => {
       const course = config.courses.find((c: Course) => c.id === this.courseId);
       if (course && course.data) {
-        this.questions = course.data;
+        this.questions = course.data as Set[];
       } else {
         console.error("No data found for course:", this.courseId);
       }

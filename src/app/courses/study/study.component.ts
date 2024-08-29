@@ -1,7 +1,6 @@
-// study.component.ts
 import { Component, OnInit } from '@angular/core';
 import { ConfigService } from '../../config.service';
-import { Course } from '../../shared/models/course.model'; // Ensure you have this import
+import { Course } from '../../shared/models/course.model';
 import { Set } from '../../shared/models/set.model';
 import { BaseComponent } from '../base/base.component';
 
