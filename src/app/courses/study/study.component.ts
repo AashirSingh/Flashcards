@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfigService } from '../../config.service';
-import { Course } from '../../shared/models/course.model';
 import { Set } from '../../shared/models/set.model';
 import { BaseComponent } from '../base/base.component';
 
@@ -13,18 +12,18 @@ export class StudyComponent extends BaseComponent implements OnInit {
   studyMaterials: Set[] = [];
 
   constructor(private configService: ConfigService) {
-    super(); // Call the base class constructor
+    super();  // Call the base class constructor
   }
 
   ngOnInit(): void {
-    this.configService.getConfig().subscribe(config => {
-      console.log("Configuration fetched:", config); // Log the fetched configuration
-      const course = config.courses.find((c: Course) => c.id === this.courseId);
-      if (course && course.data) {
-        this.studyMaterials = course.data as Set[];
-        console.log("Study materials loaded for course ID:", this.courseId); // Log the successful data load
+    this.configService.getCourses().subscribe(courses => {
+      const course = courses.find(c => c.id === +this.courseId);  // Convert courseId to number for comparison
+      if (course && course.components.study) {
+        this.studyMaterials = course.components.study.questions as Set[];  // Assume study contains questions
+        console.log("Study materials loaded:", this.studyMaterials);
       } else {
-        console.error("No data found for course:", this.courseId); // Log when no data is found
+        console.error("No data found for course:", this.courseId);
+        this.studyMaterials = [];
       }
     });
   }

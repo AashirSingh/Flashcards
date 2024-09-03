@@ -1,4 +1,4 @@
-<ion-card>
+<ion-card *ngIf="studyMaterials.length > 0">
   <ion-card-header>
     <ion-card-title>Study Materials</ion-card-title>
   </ion-card-header>
@@ -10,4 +10,9 @@
       <p>{{ material.answer }}</p>
     </ion-card-content>
   </ion-card>
+</ion-card>
+<ion-card *ngIf="studyMaterials.length === 0">
+  <ion-card-header>
+    <ion-card-title>No study materials available for this course.</ion-card-title>
+  </ion-card-header>
 </ion-card>

@@ -7,13 +7,15 @@ import { DashboardPage } from './dashboard.page';
 import { DashboardCardComponent } from './dashboard-card/dashboard-card.component';
 import { ConfigService } from '/Users/aashirsingh/Documents/testproject3/src/app/config.service';
 import { EditCourseComponent } from './edit-course/edit-course.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    DashboardPageRoutingModule
+    DashboardPageRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [ConfigService],
   declarations: [DashboardPage, DashboardCardComponent, EditCourseComponent], 

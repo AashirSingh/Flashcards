@@ -9,11 +9,11 @@ import { Router } from '@angular/router';
 export class DashboardCardComponent {
   @Input() title!: string;
   @Input() description!: string;
-  @Input() courseId!: string; // Add this line
+  @Input() courseId!: number;  // Change this to number
 
   constructor(private router: Router) {}
 
-  goToFlashcard(mode: string, courseId: string) {
-    this.router.navigate(['/flashcard', { mode: mode, courseId: courseId }]);
+  goToFlashcard(mode: string, courseId: number) {  // Ensure courseId is treated as a number
+    this.router.navigate([`/flashcard/${mode}/${courseId}`]);
   }
 }

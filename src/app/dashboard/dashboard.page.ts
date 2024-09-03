@@ -11,7 +11,7 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./dashboard.page.scss'],
 })
 export class DashboardPage implements OnInit {
-  courses: Course[] = []; // Specify the type as an array of Course objects
+  courses: Course[] = [];
 
   constructor(
     private configService: ConfigService,
@@ -27,11 +27,11 @@ export class DashboardPage implements OnInit {
   }
 
   ngOnInit() {
-    this.configService.getConfig().subscribe(data => {
-      if (data && data.courses) {
-        this.courses = data.courses as Course[];
+    this.configService.getCourses().subscribe(courses => {
+      if (courses.length > 0) {
+        this.courses = courses;
       } else {
-        console.error('Courses data is missing in the config response.');
+        console.error('No courses found.');
       }
     });
   }
@@ -40,8 +40,7 @@ export class DashboardPage implements OnInit {
     this.router.navigate(['/flashcard', mode, courseId]);
   }
 
-   // Placeholder for opening create course modal
-   openCreateCourseModal() {
+  openCreateCourseModal() {
     console.log('Open Create Course Modal');
   }
 }

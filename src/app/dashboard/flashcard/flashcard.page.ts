@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ConfigService } from '/Users/aashirsingh/Documents/testproject3/src/app/config.service';
 import { DynamicLoaderService } from '../../services/dynamic-loader.service';
 import { PracticeComponent } from '../../courses/practice/practice.component';
 import { StudyComponent } from '../../courses/study/study.component';
@@ -22,7 +21,7 @@ export class FlashcardPage implements OnInit {
     this.route.params.subscribe(params => {
       const mode = params['mode'];
       const courseId = params['courseId'];
-      console.log("Routing params:", mode, courseId);  // Ensure we are getting the correct params
+      console.log("Routing params:", mode, courseId);
       this.loadComponent(mode, courseId);
     });
   }
@@ -33,7 +32,7 @@ export class FlashcardPage implements OnInit {
       const componentRef = this.loaderService.loadComponent<any>(component, this.entry);
       if (componentRef) {
         componentRef.instance['courseId'] = courseId;
-        console.log("Course ID set in component:", componentRef.instance['courseId']);  // Confirm courseId is set
+        console.log("Course ID set in component:", componentRef.instance['courseId']);
       }
     } else {
       console.error('ViewContainerRef is not initialized');

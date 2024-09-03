@@ -1,30 +1,50 @@
-<ion-card (click)="toggleAnswer()" class="card-flip">
-  <div class="flip-container">
-    <div [class.flip]="showAnswer" class="flip">
-      <div class="card-front">
-        <ion-card-header>
-          <ion-card-title class="ion-text-center">{{ questions[currentQuestionIndex].question }}</ion-card-title>
-        </ion-card-header>
-      </div>
-      <div class="card-back">
-        <ion-card-header>
-          <ion-card-title class="ion-text-center">{{ questions[currentQuestionIndex].answer }}</ion-card-title>
-        </ion-card-header>
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Practice</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="primary" [disabled]="isReadMode" (click)="switchToReadMode()">Read</ion-button>
+      <ion-button color="primary" (click)="openWriteModal()">Write</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- Read Mode Content -->
+  <ion-card *ngIf="questions.length > 0" (click)="toggleAnswer()" class="card-flip">
+    <div class="flip-container">
+      <div [class.flip]="showAnswer" class="flip">
+        <div class="card-front">
+          <ion-card-header>
+            <ion-card-title class="ion-text-center">{{ questions[currentQuestionIndex]?.question }}</ion-card-title>
+          </ion-card-header>
+        </div>
+        <div class="card-back">
+          <ion-card-header>
+            <ion-card-title class="ion-text-center">{{ questions[currentQuestionIndex]?.answer }}</ion-card-title>
+          </ion-card-header>
+        </div>
       </div>
     </div>
-  </div>
-</ion-card>
-<ion-row>
-  <ion-col size="6">
-    <ion-button expand="block" color="medium" [disabled]="currentQuestionIndex === 0" (click)="previousQuestion()">
-      <ion-icon slot="start" name="arrow-back"></ion-icon>
-      Previous
-    </ion-button>
-  </ion-col>
-  <ion-col size="6">
-    <ion-button expand="block" (click)="nextQuestion()">
-      Next
-      <ion-icon slot="end" name="arrow-forward"></ion-icon>
-    </ion-button>
-  </ion-col>
-</ion-row>
+  </ion-card>
+
+  <ion-row *ngIf="questions.length > 0">
+    <ion-col size="6">
+      <ion-button expand="block" color="medium" [disabled]="currentQuestionIndex === 0" (click)="previousQuestion()">
+        <ion-icon slot="start" name="arrow-back"></ion-icon>
+        Previous
+      </ion-button>
+    </ion-col>
+    <ion-col size="6">
+      <ion-button expand="block" [disabled]="currentQuestionIndex >= questions.length - 1" (click)="nextQuestion()">
+        Next
+        <ion-icon slot="end" name="arrow-forward"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+
+  <ion-card *ngIf="questions.length === 0">
+    <ion-card-header>
+      <ion-card-title>No questions available for this course.</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+</ion-content>

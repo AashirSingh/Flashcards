@@ -8,21 +8,33 @@
 </ion-header>
 
 <ion-content>
-  <ion-item>
-    <ion-label>Course</ion-label>
-    <ion-select [(ngModel)]="selectedCourseId">
-      <ion-select-option *ngFor="let course of courses" [value]="course.id">
-        {{ course.name }}
-      </ion-select-option>
-    </ion-select>
-  </ion-item>
-  <ion-item>
-    <ion-label position="stacked">Question</ion-label>
-    <ion-input [(ngModel)]="newQuestion"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="stacked">Answer</ion-label>
-    <ion-input [(ngModel)]="newAnswer"></ion-input>
-  </ion-item>
-  <ion-button expand="block" (click)="addQuestionAndAnswer()">Add Question and Answer</ion-button>
+  <form [formGroup]="editCourseForm">
+    <ion-item>
+      <ion-label>Course</ion-label>
+      <ion-select formControlName="selectedCourseId">
+        <ion-select-option *ngFor="let course of courses" [value]="course.id">
+          {{ course.name }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Question</ion-label>
+      <ion-input formControlName="newQuestion"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Answer</ion-label>
+      <ion-input formControlName="newAnswer"></ion-input>
+    </ion-item>
+
+    <!-- Disable the button until the form is valid -->
+    <ion-button 
+      expand="block" 
+      (click)="addQuestionAndAnswer()" 
+      [disabled]="!editCourseForm.valid"
+      color="primary">
+      Add Question and Answer
+    </ion-button>
+  </form>
 </ion-content>
