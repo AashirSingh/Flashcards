@@ -8,6 +8,6 @@ import { MapModalComponent } from './map-modal/map-modal.component';
 @NgModule({
   declarations: [LocationPickerComponent, MapModalComponent],
   imports: [CommonModule, IonicModule],
-  exports: [LocationPickerComponent, MapModalComponent],
+  exports: [LocationPickerComponent, MapModalComponent]
 })
 export class SharedModule {}
