@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ConfigService } from '../config.service';
 import { Course } from '../shared/models/course.model';
 import { EditCourseComponent } from './edit-course/edit-course.component';
+import { CreateCourseComponent } from './create-course/create-course.component'; // Import CreateCourseComponent
 import { ModalController } from '@ionic/angular';
 
 @Component({
@@ -26,6 +27,14 @@ export class DashboardPage implements OnInit {
     return await modal.present();
   }
 
+  // Open Create Course Modal
+  async openCreateCourseModal() {
+    const modal = await this.modalController.create({
+      component: CreateCourseComponent,
+    });
+    return await modal.present();
+  }
+
   ngOnInit() {
     this.configService.getCourses().subscribe(courses => {
       if (courses.length > 0) {
@@ -40,7 +49,8 @@ export class DashboardPage implements OnInit {
     this.router.navigate(['/flashcard', mode, courseId]);
   }
 
-  openCreateCourseModal() {
-    console.log('Open Create Course Modal');
+  logout() {
+    console.log('Logout button clicked');
+    this.router.navigate(['/login']);
   }
 }

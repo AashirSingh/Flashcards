@@ -23,6 +23,14 @@ const routes: Routes = [
   {
     path: 'flashcard',
     loadChildren: () => import('./dashboard/flashcard/flashcard.module').then(m => m.FlashcardPageModule)
+  },
+  {
+    path: 'login', 
+    loadChildren: () => import("/Users/aashirsingh/Documents/testproject3/src/app/auth/auth.module").then(m => m.AuthPageModule)
+  },
+  {
+  path: 'dashboard', 
+  loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule), canActivate: [AuthGuard]
   }
 ];
 

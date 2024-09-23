@@ -8,6 +8,8 @@ import { DashboardCardComponent } from './dashboard-card/dashboard-card.componen
 import { ConfigService } from '/Users/aashirsingh/Documents/testproject3/src/app/config.service';
 import { EditCourseComponent } from './edit-course/edit-course.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LogoutComponent } from './logout/logout.component';
+import { CreateCourseComponent } from './create-course/create-course.component';
 
 @NgModule({
   imports: [
@@ -18,6 +20,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule
   ],
   providers: [ConfigService],
-  declarations: [DashboardPage, DashboardCardComponent, EditCourseComponent], 
+  declarations: [DashboardPage, DashboardCardComponent, EditCourseComponent, LogoutComponent, CreateCourseComponent], 
 })
 export class DashboardModule {}

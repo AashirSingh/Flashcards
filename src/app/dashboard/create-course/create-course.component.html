@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Create Course</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="createCourseForm">
+    <ion-item>
+      <ion-label position="stacked">Course Name</ion-label>
+      <ion-input formControlName="courseName"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Description</ion-label>
+      <ion-input formControlName="newDescription"></ion-input>
+    </ion-item>
+
+    <ion-button 
+      expand="block" 
+      (click)="createCourse()" 
+      [disabled]="!createCourseForm.valid"
+      color="primary">
+      Create Course
+    </ion-button>
+  </form>
+</ion-content>

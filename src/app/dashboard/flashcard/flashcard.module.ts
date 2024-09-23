@@ -19,7 +19,7 @@ import { WriteModalComponent } from './write-modal/write-modal.component';
     FlashcardPage,
     PracticeComponent,   // Added here
     StudyComponent,
-    WriteModalComponent    
+    WriteModalComponent,   
   ]
 })
 export class FlashcardPageModule {}
