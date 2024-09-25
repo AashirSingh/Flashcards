@@ -1,13 +1,22 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>community</ion-title>
+    <ion-title>Community Hub</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">community</ion-title>
+      <ion-title size="large">Community Hub</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Your Streak</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <h2>{{ streak }} day(s)</h2>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

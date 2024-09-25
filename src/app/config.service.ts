@@ -108,4 +108,74 @@ export class ConfigService {
   
     console.log('New course added:', courseData);
   }
+
+  // Update streak in Supabase
+ async updateStreak(userId: string): Promise<void> {
+  const localToday = new Date().toLocaleDateString('en-CA'); // User's local date in YYYY-MM-DD format
+
+  // Check if the user already has a streak record
+  const { data: userStreakData, error } = await supabase
+    .from('user_streaks')
+    .select('last_streak_update, streak')
+    .eq('user_id', userId)
+    .single();
+
+  if (error) {
+    if (error.code !== 'PGRST116') {
+      console.error('Error fetching streak:', error);
+      return;
+    }
+    // If error code 'PGRST116', this means no existing record for the user, so we proceed to create a new one
+    console.log('No existing streak record found for user, creating a new entry.');
+  }
+
+  // Check if the streak has already been updated today
+  if (userStreakData && userStreakData.last_streak_update === localToday) {
+      console.log('Streak already updated today, no changes made');
+      return;  // Exit the function since the streak has already been updated today
+  }
+
+  let newStreak = 1; // Default streak for a new record
+  if (userStreakData) {
+    const lastLoginDate = new Date(userStreakData.last_streak_update).toLocaleDateString('en-CA');
+
+    // If the last update was yesterday, increment the streak
+    if (new Date(localToday).getTime() - new Date(lastLoginDate).getTime() === 86400000) {
+      newStreak = userStreakData.streak + 1; // Increment streak if consecutive day
+    }
+  }
+
+  // Upsert (insert or update) streak data with the local time
+  const { error: upsertError } = await supabase
+    .from('user_streaks')
+    .upsert({
+      user_id: userId,
+      streak: newStreak,
+      last_streak_update: localToday // Store the local date
+    });
+
+  if (upsertError) {
+    console.error('Error updating streak:', upsertError);
+  } else {
+    console.log(`Streak updated successfully. Current streak: ${newStreak}`);
+  }
 }
+
+// Retrieve the current streak for a user
+async getStreak(userId: string): Promise<number> {
+  const { data, error } = await supabase
+    .from('user_streaks')
+    .select('streak')
+    .eq('user_id', userId)
+    .single();
+
+  if (error && error.code !== 'PGRST116') {
+    console.error('Error fetching streak:', error);
+    return 0;
+  }
+
+  return data?.streak || 0;
+}
+}
+
+

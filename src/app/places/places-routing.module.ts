@@ -42,12 +42,31 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'dashboard',
-        loadChildren: () => import('../dashboard/dashboard.module').then(m => m.DashboardModule)
+        path: 'account',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('./account/account.module').then(m => m.AccountPageModule)
+          }
+        ]
       },
       {
-        path: 'account',
-        loadChildren: () => import('./account/account.module').then(m => m.AccountPageModule)
+        path: 'dashboard',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../dashboard/dashboard.module').then(m => m.DashboardModule)
+          }
+        ]
+      },
+      {
+        path: 'community',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../community/community.module').then(m => m.CommunityPageModule)
+          }
+        ]
       },
       {
         path: '',
@@ -60,6 +79,10 @@ const routes: Routes = [
     path: '',
     redirectTo: '/places/tabs/discover',
     pathMatch: 'full'
+  },
+  {
+    path: 'account',
+    loadChildren: () => import('./account/account.module').then( m => m.AccountPageModule)
   }
 ];
 
