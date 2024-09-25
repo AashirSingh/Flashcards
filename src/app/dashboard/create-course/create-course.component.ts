@@ -8,8 +8,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './create-course.component.html',
   styleUrls: ['./create-course.component.scss'],
 })
-export class CreateCourseComponent {
 
+export class CreateCourseComponent {
   createCourseForm: FormGroup;
 
   constructor(
@@ -19,8 +19,7 @@ export class CreateCourseComponent {
   ) {
     this.createCourseForm = this.formBuilder.group({
       courseName: ['', Validators.required],
-      newQuestion: ['', Validators.required],
-      newAnswer: ['', Validators.required],
+      newDescription: ['', Validators.required], // Ensure you are capturing the description
     });
   }
 
@@ -30,12 +29,12 @@ export class CreateCourseComponent {
 
   createCourse() {
     if (this.createCourseForm.valid) {
-      const { courseName, newQuestion, newAnswer } = this.createCourseForm.value;
+      const { courseName, newDescription } = this.createCourseForm.value;
 
-      this.configService.createNewCourse(courseName, newQuestion, newAnswer)
+      this.configService.createNewCourse(courseName, newDescription)
         .then(() => {
           console.log('Course created successfully.');
-          this.dismiss();
+          this.dismiss(); // Close the modal upon success
         })
         .catch(err => {
           console.error('Error creating course:', err);

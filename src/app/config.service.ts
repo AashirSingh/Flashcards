@@ -39,15 +39,46 @@ export class ConfigService {
       return [];
     }
 
+    // Map the courses to include practice, study, and quiz components
     return courses.map(course => ({
       id: course.id,
       name: course.name,
       description: course.description,
       components: {
         practice: { questions: course.questions || [] },
-        study: { questions: course.questions || [] }
+        study: { questions: course.questions || [] },
+        quiz: { questions: this.generateQuizQuestions(course.questions || []) }
       }
     }));
+  }
+
+  // Method to generate quiz data by randomizing options and including correct/incorrect answers
+  private generateQuizQuestions(questions: { question: string, answer: string }[]): { question: string, options: string[], answer: string }[] {
+    return questions.map(questionItem => {
+      const correctAnswer = questionItem.answer;
+      const allAnswers = questions.map(q => q.answer);  // All possible answers from the course
+
+      // Select up to 3 incorrect answers, excluding the correct answer
+      const incorrectAnswers = allAnswers.filter(answer => answer !== correctAnswer).slice(0, 3);
+
+      // Shuffle the correct answer with incorrect answers to create options
+      const options = this.shuffleArray([correctAnswer, ...incorrectAnswers]);
+
+      return {
+        question: questionItem.question,
+        options,
+        answer: correctAnswer
+      };
+    });
+  }
+
+  // Shuffle an array (used for randomizing quiz options)
+  private shuffleArray(array: string[]): string[] {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
   }
 
   // Add a new question and answer to a specific course
@@ -64,28 +95,17 @@ export class ConfigService {
   }
 
   // Add a method to create a new course with the first question and answer
-  async createNewCourse(courseName: string, question: string, answer: string): Promise<void> {
-    // Insert a new course
+  async createNewCourse(courseName: string, description: string): Promise<void> {
+    // Insert a new course with name and description
     const { data: courseData, error: courseError } = await supabase
       .from('courses')
-      .insert([{ name: courseName }])
+      .insert([{ name: courseName, description }])
       .select('id');  // Get the course ID of the newly created course
-
+  
     if (courseError) {
       throw courseError;
     }
-
-    const newCourseId = courseData[0].id;
-
-    // Add the first question and answer to the new course
-    const { data: questionData, error: questionError } = await supabase
-      .from('questions')
-      .insert([{ course_id: newCourseId, question, answer }]);
-
-    if (questionError) {
-      throw questionError;
-    }
-
-    console.log('New course and first question added:', courseData, questionData);
+  
+    console.log('New course added:', courseData);
   }
 }

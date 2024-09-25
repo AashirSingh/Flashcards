@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DynamicLoaderService } from '../../services/dynamic-loader.service';
 import { PracticeComponent } from '../../courses/practice/practice.component';
 import { StudyComponent } from '../../courses/study/study.component';
+import { QuizComponent } from 'src/app/courses/quiz/quiz.component';  // Import QuizComponent
 
 @Component({
   selector: 'app-flashcard',
@@ -27,15 +28,26 @@ export class FlashcardPage implements OnInit {
   }
 
   loadComponent(mode: string, courseId: string) {
-    const component = mode === 'practice' ? PracticeComponent : StudyComponent;
-    if (this.entry) {
+    let component: any;
+
+    // Determine which component to load based on the mode
+    if (mode === 'practice') {
+      component = PracticeComponent;
+    } else if (mode === 'study') {
+      component = StudyComponent;
+    } else if (mode === 'quiz') {
+      component = QuizComponent;  // Load QuizComponent for the 'quiz' mode
+    }
+
+    // Dynamically load the component into the view
+    if (this.entry && component) {
       const componentRef = this.loaderService.loadComponent<any>(component, this.entry);
       if (componentRef) {
-        componentRef.instance['courseId'] = courseId;
+        componentRef.instance['courseId'] = courseId;  // Set the courseId in the dynamically loaded component
         console.log("Course ID set in component:", componentRef.instance['courseId']);
       }
     } else {
-      console.error('ViewContainerRef is not initialized');
+      console.error('ViewContainerRef is not initialized or component is undefined');
     }
   }
 }

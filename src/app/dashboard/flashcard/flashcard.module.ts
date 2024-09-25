@@ -6,6 +6,7 @@ import { FlashcardPageRoutingModule } from './flashcard-routing.module';
 import { FlashcardPage } from './flashcard.page';
 import { PracticeComponent } from '../../courses/practice/practice.component';
 import { StudyComponent } from '../../courses/study/study.component';
+import { QuizComponent } from 'src/app/courses/quiz/quiz.component';
 import { WriteModalComponent } from './write-modal/write-modal.component';
 
 @NgModule({
@@ -19,6 +20,7 @@ import { WriteModalComponent } from './write-modal/write-modal.component';
     FlashcardPage,
     PracticeComponent,   // Added here
     StudyComponent,
+    QuizComponent,
     WriteModalComponent,   
   ]
 })
