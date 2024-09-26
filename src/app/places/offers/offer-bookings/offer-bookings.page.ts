@@ -4,8 +4,8 @@ import { NavController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
-import { Place } from "/Users/aashirsingh/Documents/testproject3/src/app/places/place.model";
-import { PlacesService } from '/Users/aashirsingh/Documents/testproject3/src/app/places/places.service';
+import { Place } from '../../place.model';
+import { PlacesService } from '../../places.service';
 
 @Component({
   selector: 'app-offer-bookings',

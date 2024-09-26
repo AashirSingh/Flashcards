@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
-import { OfferItemComponent } from '/Users/aashirsingh/Documents/testproject3/src/app/places/offers/offer-item/offer-item.component';
+import { OfferItemComponent } from './offer-item/offer-item.component';
 import { IonicModule } from '@ionic/angular';
 
 import { OffersPage } from './offers.page';

@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { take, tap, switchMap, map } from 'rxjs/operators';
-import { AuthService } from '/Users/aashirsingh/Documents/testproject3/src/app/auth/auth.service';
-import { Account } from '/Users/aashirsingh/Documents/testproject3/src/app/places/account/account.model';
+import { AuthService } from '../../auth/auth.service';
+import { Account } from './account.model';  // Fixed relative path
 
 interface AccountData {
   userId: string;

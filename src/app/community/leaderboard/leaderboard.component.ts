@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ConfigService } from '/Users/aashirsingh/Documents/testproject3/src/app/config.service';
+import { ConfigService } from '../../config.service';
+
 
 @Component({
   selector: 'app-leaderboard',
