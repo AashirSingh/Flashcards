@@ -10,18 +10,20 @@ import { ConfigService } from './config.service';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { environment } from '../environments/environment';
+import { StorageModule } from '@ngx-pwa/local-storage';
+
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
+    StorageModule.forRoot({}), // <-- Corrected: Add parentheses here
     IonicModule.forRoot(),
     AppRoutingModule,
     // Initialize Firebase with your environment settings
-    AngularFireModule.initializeApp(environment.firebase), // <-- Add this line
-    AngularFireAuthModule,
-     // <-- Add this line
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule
   ],
   providers: [ConfigService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }

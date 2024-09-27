@@ -29,6 +29,7 @@
     "@capacitor/keyboard": "6.0.1",
     "@capacitor/status-bar": "6.0.0",
     "@ionic/angular": "^8.2.7",
+    "@ngx-pwa/local-storage": "^18.0.0",
     "@supabase/supabase-js": "^2.45.2",
     "chart.js": "^3.9.1",
     "firebase": "^10.13.0",
