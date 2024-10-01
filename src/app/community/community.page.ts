@@ -9,17 +9,24 @@ import { AuthService } from './../auth/auth.service';
 })
 export class CommunityPage implements OnInit {
   streak: number = 0;
+  personalBest: number = 0;  // Add a variable for personal best streak
   chartData: any;
   chartOptions: any;
 
   constructor(private configService: ConfigService, private authService: AuthService) { }
 
   ngOnInit() {
-    // Fetch streak
+    // Fetch streak and personal best
     this.authService.userId.subscribe(userId => {
       if (userId) {
-        this.configService.getStreak(userId).then(streak => {
+        // Update the current streak
+        this.configService.updateStreak(userId).then(streak => {
           this.streak = streak;
+        });
+
+        // Fetch the personal best streak
+        this.configService.getPersonalBest(userId).then(personalBest => {
+          this.personalBest = personalBest;
         });
       }
     });
@@ -55,7 +62,7 @@ export class CommunityPage implements OnInit {
         plugins: {
           title: {
             display: true,
-            text: 'Top Performers (Quiz)',  // <-- Added title here
+            text: 'Top Performers (Quiz)',
             font: {
               size: 18
             },

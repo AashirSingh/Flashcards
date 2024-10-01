@@ -6,6 +6,7 @@ import { CommunityPageRoutingModule } from './community-routing.module';
 import { CommunityPage } from './community.page';
 import { NgChartsModule } from 'ng2-charts'; // <-- Add this
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
+import { PersonalBestComponent } from './personal-best/personal-best.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { LeaderboardComponent } from './leaderboard/leaderboard.component';
     CommunityPageRoutingModule,
     NgChartsModule // <-- Add this
   ],
-  declarations: [CommunityPage, LeaderboardComponent]
+  declarations: [CommunityPage, LeaderboardComponent, PersonalBestComponent]
 })
 export class CommunityPageModule {}

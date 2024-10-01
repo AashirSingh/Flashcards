@@ -31,6 +31,7 @@
     "@ionic/angular": "^8.2.7",
     "@ngx-pwa/local-storage": "^18.0.0",
     "@supabase/supabase-js": "^2.45.2",
+    "canvas-confetti": "^1.9.3",
     "chart.js": "^3.9.1",
     "firebase": "^10.13.0",
     "ionicons": "^7.0.0",
