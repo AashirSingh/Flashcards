@@ -4,6 +4,8 @@
     <ion-buttons slot="end">
       <ion-button color="primary" [disabled]="isReadMode" (click)="switchToReadMode()">Read</ion-button>
       <ion-button color="primary" (click)="openWriteModal()">Write</ion-button>
+      <!-- Play Sound button for Sanskrit course only -->
+      <ion-button *ngIf="isSanskritCourse" color="primary" (click)="playSound()">Play Sound</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>

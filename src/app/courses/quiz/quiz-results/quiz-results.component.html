@@ -1,3 +1,22 @@
-<p>
-  quiz-results works!
-</p>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Quiz Results</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <h2 class="ion-text-center">Quiz Completed!</h2>
+  <p class="ion-text-center">
+    You got {{ correctAnswers }} out of {{ totalQuestions }} questions correct.
+  </p>
+  <div class="ion-text-center" *ngIf="passedQuiz()">
+    <ion-icon name="trophy" color="warning" style="font-size: 48px;"></ion-icon>
+    <h3>Congratulations, you passed!</h3>
+  </div>
+  <div class="ion-text-center" *ngIf="!passedQuiz()">
+    <h3>Better luck next time!</h3>
+  </div>
+</ion-content>

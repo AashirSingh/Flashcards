@@ -3,6 +3,7 @@ import { ConfigService } from '../../config.service';
 import { Set } from '../../shared/models/set.model';
 import { ModalController } from '@ionic/angular';
 import { WriteModalComponent } from '../../dashboard/flashcard/write-modal/write-modal.component'; 
+import { Howl } from 'howler'; // Import Howler.js
 
 @Component({
   selector: 'app-practice',
@@ -11,33 +12,67 @@ import { WriteModalComponent } from '../../dashboard/flashcard/write-modal/write
 })
 export class PracticeComponent implements OnInit {
   @Input() courseId!: string;
-  questions: Set[] = [];  // Array to hold the questions fetched from the course
-  currentQuestionIndex = 0;  // Keeps track of the current question in the practice session
-  showAnswer = false;  // Controls whether the answer is visible
+  questions: Set[] = [];
+  currentQuestionIndex = 0;
+  showAnswer = false;
+  isReadMode = true;
+  isSanskritCourse = false; // Flag for Sanskrit course
+  sound!: Howl;
 
-  isReadMode = true;  // Determines whether the component is in Read or Write mode
-
-  constructor(private configService: ConfigService, private modalController: ModalController) {}
+  constructor(
+    private configService: ConfigService, 
+    private modalController: ModalController
+  ) {}
 
   ngOnInit(): void {
     this.configService.getCourses().subscribe(courses => {
-      const course = courses.find(c => c.id === +this.courseId);  // Convert courseId to a number for comparison
+      const course = courses.find(c => c.id === +this.courseId);
       if (course && course.components.practice) {
-        this.questions = course.components.practice.questions as Set[];  // Fetch questions from the practice component
+        this.questions = course.components.practice.questions as Set[];
         console.log("Questions loaded:", this.questions);
+
+        // Check if the current course is Sanskrit
+        if (course.name.toLowerCase() === 'sanskrit') {
+          this.isSanskritCourse = true;
+          this.loadSound(); // Load sound for Sanskrit course
+        }
       } else {
         console.error("No data found for course:", this.courseId);
-        this.questions = [];  // Ensure questions is an empty array if none found
+        this.questions = [];
       }
     });
   }
 
-  // Switch to Read mode
+  loadSound() {
+    // Initialize Howler with the sound file for Sanskrit
+    this.sound = new Howl({
+      src: 'assets/sounds/4209177_livepiano__01c0_om-elo.wav',
+      html5: true,
+      onload: () => {
+        console.log("Sound loaded successfully");
+      },
+      onplayerror: (error:any) => {
+        console.error("Error while trying to play the sound:", error);
+      },
+      onplay: () => {
+        console.log("Sound is playing");
+      },
+      onloaderror: (error:any) => {
+        console.error("Failed to load sound:", error);
+      }
+    });
+  }
+
+  playSound() {
+    if (this.sound) {
+      this.sound.play();
+    }
+  }
+
   switchToReadMode() {
     this.isReadMode = true;
   }
 
-  // Open the write modal
   async openWriteModal() {
     const modal = await this.modalController.create({
       component: WriteModalComponent
@@ -48,18 +83,18 @@ export class PracticeComponent implements OnInit {
   nextQuestion(): void {
     if (this.currentQuestionIndex < this.questions.length - 1) {
       this.currentQuestionIndex++;
-      this.showAnswer = false;  // Reset answer visibility when moving to the next question
+      this.showAnswer = false;
     }
   }
 
   previousQuestion(): void {
     if (this.currentQuestionIndex > 0) {
       this.currentQuestionIndex--;
-      this.showAnswer = false;  // Reset answer visibility when moving to the previous question
+      this.showAnswer = false;
     }
   }
 
   toggleAnswer(): void {
-    this.showAnswer = !this.showAnswer;  // Toggle the visibility of the answer
+    this.showAnswer = !this.showAnswer;
   }
 }

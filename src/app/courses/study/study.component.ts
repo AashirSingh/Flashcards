@@ -10,21 +10,30 @@ import { BaseComponent } from '../base/base.component';
 })
 export class StudyComponent extends BaseComponent implements OnInit {
   studyMaterials: Set[] = [];
+  private audio: HTMLAudioElement;
 
   constructor(private configService: ConfigService) {
-    super();  // Call the base class constructor
+    super();
+    this.audio = new Audio();
   }
 
   ngOnInit(): void {
     this.configService.getCourses().subscribe(courses => {
-      const course = courses.find(c => c.id === +this.courseId);  // Convert courseId to number for comparison
+      const course = courses.find(c => c.id === +this.courseId);
       if (course && course.components.study) {
-        this.studyMaterials = course.components.study.questions as Set[];  // Assume study contains questions
+        this.studyMaterials = course.components.study.questions as Set[];
+        this.playSound('/assets/sounds/study-material.mp3');
         console.log("Study materials loaded:", this.studyMaterials);
       } else {
         console.error("No data found for course:", this.courseId);
         this.studyMaterials = [];
       }
     });
+  }
+
+  playSound(fileUrl: string): void {
+    this.audio.src = fileUrl;
+    this.audio.load();
+    this.audio.play();
   }
 }
