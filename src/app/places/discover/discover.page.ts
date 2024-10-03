@@ -17,6 +17,7 @@ export class DiscoverPage implements OnInit, OnDestroy {
   listedLoadedPlaces!: Place[];
   relevantPlaces!: Place[];
   isLoading = false;
+  selectedSegment: string = 'Category'; // Ensure it is a string by default
   private placesSub!: Subscription;
 
   constructor(
@@ -45,15 +46,16 @@ export class DiscoverPage implements OnInit, OnDestroy {
   }
 
   onFilterUpdate(event: CustomEvent<SegmentChangeEventDetail>) {
-    this.authService.userId.pipe(take(1)).subscribe(userId =>{
-    if (event.detail.value === 'all') {
-      this.relevantPlaces = this.loadedPlaces;
-      this.listedLoadedPlaces = this.relevantPlaces.slice(1);
-    } else {
-      this.relevantPlaces = this.loadedPlaces.filter(
-        place => place.userId !== userId
-      );
-    }
+    this.selectedSegment = event.detail.value as string || 'Category'; // Cast value to string
+    this.authService.userId.pipe(take(1)).subscribe(userId => {
+      if (this.selectedSegment === 'Courses') {
+        this.relevantPlaces = this.loadedPlaces;
+        this.listedLoadedPlaces = this.relevantPlaces.slice(1);
+      } else {
+        this.relevantPlaces = this.loadedPlaces.filter(
+          place => place.userId !== userId
+        );
+      }
       this.listedLoadedPlaces = this.relevantPlaces.slice(1);
     });
   }
