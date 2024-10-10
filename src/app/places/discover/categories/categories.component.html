@@ -1,6 +1,19 @@
-<ion-list>
-  <ion-item *ngFor="let category of categories">
-    <ion-icon [name]="getIconForCategory(category)" slot="start"></ion-icon>
+<!-- Show Categories if no category is selected -->
+<ion-list *ngIf="!selectedCategory" class="categories-list">
+  <ion-item 
+    button 
+    *ngFor="let category of categories" 
+    (click)="selectCategory(category)" 
+    class="category-item">
+    <ion-icon [name]="getIconForCategory(category)" class="category-icon"></ion-icon>
     <ion-label class="category-label">{{ category }}</ion-label>
   </ion-item>
+</ion-list>
+
+<!-- Show Courses if a category is selected -->
+<ion-list *ngIf="selectedCategory" class="courses-list">
+  <ion-item *ngFor="let course of courses" class="course-item" (click)="showCoursePopup(course)">
+    <ion-label class="course-label">{{ course }}</ion-label>
+  </ion-item>
+  <ion-button expand="full" (click)="goBack()" class="back-button">Back to Categories</ion-button>
 </ion-list>

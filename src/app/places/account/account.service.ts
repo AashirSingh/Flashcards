@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { take, tap, switchMap, map } from 'rxjs/operators';
+
+import { Account } from './account.model';
 import { AuthService } from '../../auth/auth.service';
-import { Account } from './account.model';  // Fixed relative path
 
 interface AccountData {
   userId: string;
@@ -11,132 +12,23 @@ interface AccountData {
   email: string;
   phone: string;
   items: any[];
+  role: string;
 }
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
   private _accounts = new BehaviorSubject<Account[]>([]);
 
-  get accounts$() {
+  get account() {
     return this._accounts.asObservable();
   }
 
   constructor(private authService: AuthService, private http: HttpClient) {}
 
-  updateName(accountId: string, newName: string) {
-    return this._accounts.pipe(
-      take(1),
-      switchMap(accounts => {
-        const updatedAccountIndex = accounts.findIndex(acc => acc.id === accountId);
-        const updatedAccounts = [...accounts];
-        const oldAccount = updatedAccounts[updatedAccountIndex];
-  
-        updatedAccounts[updatedAccountIndex] = new Account(
-          oldAccount.id,
-          oldAccount.userId,
-          newName, // Update the name
-          oldAccount.email,
-          oldAccount.phone,
-          oldAccount.items
-        );
-  
-        return this.http.put(
-          "http://bookings-2bd51-default-rtdb.firebaseio.com//accounts/${accountId}.json",
-          { ...updatedAccounts[updatedAccountIndex], id: null }
-        ).pipe(
-          tap(() => {
-            this._accounts.next(updatedAccounts);
-          })
-        );
-      })
-    );
-  }
-
-  addName(
-    userId: string,
-    name: string,
-    email: string,
-    phone: string,
-    items: any[]
-  ) {
-    let generatedId: string;
-    const newAccount = new Account(
-      Math.random().toString(), // generateId
-      userId,
-      name,
-      email,
-      phone,
-      items
-    );
-    return this.http
-      .post<{ name: string }>(
-        "https://bookings-2bd51-default-rtdb.firebaseio.com/accounts.json",
-        { ...newAccount, id: null }
-      )
-      .pipe(
-        switchMap(resData => {
-          const generatedId = resData.name;
-          newAccount.id = generatedId;
-          return this.accounts$.pipe(take(1));
-        }),
-        tap(accounts => {
-          this._accounts.next(accounts.concat(newAccount));
-        })
-      );
-  }
-
-  deleteName(accountId: string) {
-    return this.http
-      .delete(
-        `https://bookings-2bd51-default-rtdb.firebaseio.com/accounts/${accountId}.json`
-      )
-      .pipe(
-        switchMap(() => this._accounts.pipe(take(1))),
-        tap(accounts => {
-          this._accounts.next(accounts.filter(account => account.id !== accountId));
-        })
-      );
-  }
-
-  addPhone(
-    userId: string,
-    name: string,
-    email: string,
-    phone: string,
-    items: any[]
-  ) {
-    const newAccount = new Account(
-      Math.random().toString(), // generateId
-      userId,
-      name,
-      email,
-      phone,
-      items
-    );
-  
-    return this.http
-      .post<{ name: string }>(
-        "https://bookings-2bd51-default-rtdb.firebaseio.com/accounts.json",
-        { ...newAccount, id: null }
-      )
-      .pipe(
-        switchMap(resData => {
-          const generatedId = resData.name;
-          newAccount.id = generatedId;
-          return this.accounts$.pipe(take(1));
-        }),
-        tap(accounts => {
-          this._accounts.next(accounts.concat(newAccount));
-        })
-      );
-  }
-
-
-  fetchAccounts() {
-    const userId = this.authService.userId;
+  fetchAccount() {
     return this.http
       .get<{ [key: string]: AccountData }>(
-        `https://bookings-2bd51-default-rtdb.firebaseio.com/accounts.json?orderBy="userId"&equalTo="${userId}"`
+        `https://bookings-abeec-default-rtdb.firebaseio.com/accounts.json?orderBy="userId"&equalTo="${this.authService.userId}"`
       )
       .pipe(
         map(accountData => {
@@ -150,7 +42,8 @@ export class AccountService {
                   accountData[key].name,
                   accountData[key].email,
                   accountData[key].phone,
-                  accountData[key].items
+                  accountData[key].items,
+                  accountData[key].role // Fetch role
                 )
               );
             }
@@ -161,5 +54,61 @@ export class AccountService {
           this._accounts.next(accounts);
         })
       );
+  }
+
+  addName(
+    userId: string,
+    name: string,
+    email: string,
+    phone: string,
+    items: any[],
+    role: string = 'user' // Default role is 'user'
+  ) {
+    let generatedId: string;
+    const newAccount = new Account(
+      Math.random().toString(),
+      userId,
+      name,
+      email,
+      phone,
+      items,
+      role // Add role while creating new account
+    );
+    return this.http
+      .post<{ name: string }>(
+        'https://bookings-abeec-default-rtdb.firebaseio.com/accounts.json',
+        { ...newAccount, id: null }
+      )
+      .pipe(
+        switchMap(resData => {
+          generatedId = resData.name;
+          return this._accounts;
+        }),
+        take(1),
+        tap(accounts => {
+          newAccount.id = generatedId;
+          this._accounts.next(accounts.concat(newAccount));
+        })
+      );
+  }
+
+  //Adds user and admin role field for existing accounts in firebase
+  updateRoleForExistingAccounts() {
+    this.http.get<{ [key: string]: AccountData }>(
+      `https://bookings-abeec-default-rtdb.firebaseio.com/accounts.json`
+    )
+    .pipe(
+      map(accountData => {
+        for (const key in accountData) {
+          if (accountData.hasOwnProperty(key) && !accountData[key].role) {
+            // If the account doesn't have a role, set it to 'user' by default
+            this.http.patch(
+              `https://bookings-abeec-default-rtdb.firebaseio.com/accounts/${key}.json`,
+              { role: 'user' }  // Set default role to 'user' or 'admin'
+            ).subscribe();
+          }
+        }
+      })
+    ).subscribe();
   }
 }

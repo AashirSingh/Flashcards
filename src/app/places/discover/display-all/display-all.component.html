@@ -1,0 +1,14 @@
+<ion-grid>
+  <ion-row>
+    <ion-col size="6" *ngFor="let course of courses">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>{{ course.title }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p>{{ course.description }}</p>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>

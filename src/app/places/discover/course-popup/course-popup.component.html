@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ courseName }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="course-content">
+  <div class="course-info">
+    <h2>{{ courseName }}</h2>
+    <p>{{ courseDescription }}</p>
+  </div>
+
+  <div class="button-group">
+    <ion-button expand="block" class="course-button" (click)="navigateTo('practice')">
+      + PRACTICE
+    </ion-button>
+    <ion-button expand="block" class="course-button" (click)="navigateTo('study')">
+      - STUDY
+    </ion-button>
+    <ion-button expand="block" class="course-button" (click)="navigateTo('quiz')">
+      + QUIZ
+    </ion-button>
+  </div>
+</ion-content>

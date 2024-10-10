@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
 import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
@@ -18,7 +17,8 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
+    loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'flashcard',
@@ -29,12 +29,12 @@ const routes: Routes = [
     loadChildren: () => import("./auth/auth.module").then(m => m.AuthPageModule)
   },
   {
-  path: 'dashboard', 
-  loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule), canActivate: [AuthGuard]
+    path: 'community',
+    loadChildren: () => import('./community/community.module').then(m => m.CommunityPageModule)
   },
   {
-    path: 'community',
-    loadChildren: () => import('./community/community.module').then( m => m.CommunityPageModule)
+    path: 'courses',
+    loadChildren: () => import('./shared/courses.module').then(m => m.CoursesModule) // Import practice, study, and quiz here
   }
 ];
 

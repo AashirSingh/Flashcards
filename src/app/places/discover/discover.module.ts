@@ -5,6 +5,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { DiscoverPage } from './discover.page';
 import { CategoriesComponent } from './categories/categories.component';
+import { DisplayAllComponent } from './display-all/display-all.component';
+import { CoursePopupComponent } from './course-popup/course-popup.component';
 
 const routes: Routes = [
   {
@@ -21,6 +23,6 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  declarations: [DiscoverPage, CategoriesComponent]
+  declarations: [DiscoverPage, CategoriesComponent, DisplayAllComponent, CoursePopupComponent]
 })
 export class DiscoverPageModule {}
