@@ -1,3 +1,4 @@
+// course-popup.component.ts
 import { Component, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
@@ -8,9 +9,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./course-popup.component.scss'],
 })
 export class CoursePopupComponent {
-  @Input() courseId!: number;
   @Input() courseName!: string;
   @Input() courseDescription!: string;
+  @Input() courseId!: number;
 
   constructor(private modalCtrl: ModalController, private router: Router) {}
 
@@ -18,11 +19,9 @@ export class CoursePopupComponent {
     this.modalCtrl.dismiss();
   }
 
-  navigateTo(option: string) {
-    // Logic to navigate to practice, study, or quiz with courseId
-    const route = `/courses/${option}/${this.courseId}`;
-    this.router.navigate([route]).then(() => {
-      this.dismiss(); // Dismiss after navigating successfully
-    });
+  async navigateTo(option: string) {
+    // Ensure modal is dismissed before navigating
+    await this.modalCtrl.dismiss();
+    this.router.navigate([`/courses/${option}`, this.courseId]);
   }
 }

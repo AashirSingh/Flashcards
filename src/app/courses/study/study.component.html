@@ -1,18 +1,26 @@
-<ion-card *ngIf="studyMaterials.length > 0">
-  <ion-card-header>
-    <ion-card-title>Study Materials</ion-card-title>
-  </ion-card-header>
-  <ion-card *ngFor="let material of studyMaterials">
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Study</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngIf="studyMaterials.length > 0">
     <ion-card-header>
-      <ion-card-title>{{ material.question }}</ion-card-title>
+      <ion-card-title>Study Materials</ion-card-title>
     </ion-card-header>
-    <ion-card-content>
-      <p>{{ material.answer }}</p>
-    </ion-card-content>
+    <ion-card *ngFor="let material of studyMaterials">
+      <ion-card-header>
+        <ion-card-title>{{ material.question }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{ material.answer }}</p>
+      </ion-card-content>
+    </ion-card>
   </ion-card>
-</ion-card>
-<ion-card *ngIf="studyMaterials.length === 0">
-  <ion-card-header>
-    <ion-card-title>No study materials available for this course.</ion-card-title>
-  </ion-card-header>
-</ion-card>
+  <ion-card *ngIf="studyMaterials.length === 0">
+    <ion-card-header>
+      <ion-card-title>No study materials available for this course.</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+</ion-content>

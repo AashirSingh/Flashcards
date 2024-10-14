@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ConfigService } from '../../config.service';
 import { Set } from '../../shared/models/set.model';
 import { ModalController } from '@ionic/angular';
-import { QuizResultsComponent } from './quiz-results/quiz-results.component'; // Import the QuizResultsComponent
+import { QuizResultsComponent } from './quiz-results/quiz-results.component';
 
 @Component({
   selector: 'app-quiz',
@@ -10,32 +11,54 @@ import { QuizResultsComponent } from './quiz-results/quiz-results.component'; //
   styleUrls: ['./quiz.component.scss']
 })
 export class QuizComponent implements OnInit {
-  @Input() courseId!: number;
-  questions: Set[] = [];  // Array to hold the questions for the quiz
-  currentQuestionIndex = 0;  // Keeps track of the current question
-  options: string[] = [];  // Array to hold the multiple-choice options
-  selectedOption: string = '';  // The user's selected answer
-  correctAnswer: string = '';  // Holds the correct answer for the current question
-  selectionLocked = false;  // Locks the selection after the user picks an answer
-  correctAnswersCount = 0;  // Tracks the number of correct answers -
+  @Input() courseId?: string;
+  questions: Set[] = []; // Array to hold the questions for the quiz
+  currentQuestionIndex = 0; // Keeps track of the current question
+  options: string[] = []; // Array to hold the multiple-choice options
+  selectedOption: string = ''; // The user's selected answer
+  correctAnswer: string = ''; // Holds the correct answer for the current question
+  selectionLocked = false; // Locks the selection after the user picks an answer
+  correctAnswersCount = 0; // Tracks the number of correct answers
 
   private audio: HTMLAudioElement;
 
-  constructor(private configService: ConfigService, private modalCtrl: ModalController) {
+  constructor(
+    private configService: ConfigService,
+    private modalCtrl: ModalController,
+    private route: ActivatedRoute
+  ) {
     this.audio = new Audio();
   }
 
   ngOnInit(): void {
-    this.loadQuestions();
+    if (!this.courseId) {
+      this.route.paramMap.subscribe(params => {
+        const idFromRoute = params.get('id');
+        if (idFromRoute) {
+          this.courseId = idFromRoute;
+        }
+        this.loadQuestions();
+      });
+    } else {
+      this.loadQuestions();
+    }
   }
 
   // Load questions from the ConfigService
   loadQuestions(): void {
+    if (!this.courseId) {
+      console.error("Course ID is not provided.");
+      return;
+    }
+
     this.configService.getCourses().subscribe(courses => {
-      const course = courses.find(c => c.id === +this.courseId);  
+      const course = courses.find(c => c.id === +this.courseId!);
       if (course && course.components.practice) {
         this.questions = course.components.practice.questions as Set[];
         this.loadOptions();
+      } else {
+        console.error("No data found for course:", this.courseId);
+        this.questions = [];
       }
     });
   }
@@ -43,9 +66,9 @@ export class QuizComponent implements OnInit {
   // Load the multiple-choice options for the current question
   loadOptions(): void {
     if (this.questions.length > 0) {
-      this.correctAnswer = this.questions[this.currentQuestionIndex].answer;  // Store the correct answer
+      this.correctAnswer = this.questions[this.currentQuestionIndex].answer; // Store the correct answer
       this.options = this.generateOptions(this.correctAnswer);
-      this.selectionLocked = false;  // Allow selection when loading a new question
+      this.selectionLocked = false; // Allow selection when loading a new question
     }
   }
 
@@ -53,10 +76,10 @@ export class QuizComponent implements OnInit {
   generateOptions(correctAnswer: string): string[] {
     const allAnswers = this.questions.map(q => q.answer);
     const incorrectAnswers = allAnswers.filter(a => a !== correctAnswer);
-    
+
     // Select up to 3 incorrect answers
     const selectedIncorrect = incorrectAnswers.slice(0, 3);
-    
+
     // Shuffle the correct answer with the selected incorrect answers
     return this.shuffleArray([correctAnswer, ...selectedIncorrect]);
   }
@@ -73,28 +96,28 @@ export class QuizComponent implements OnInit {
   // Handle option selection by the user
   selectOption(event: any): void {
     this.selectedOption = event.detail.value;
-    this.selectionLocked = true;  // Lock selection after an option is selected
+    this.selectionLocked = true; // Lock selection after an option is selected
 
     if (this.isCorrect()) {
-      this.playSound('/assets/sounds/correct-answer.mp3');  // Play correct answer sound
+      this.playSound('/assets/sounds/correct-answer.mp3'); // Play correct answer sound
     } else {
-      this.playSound('/assets/sounds/wrong-answer.mp3');  // Play wrong answer sound
+      this.playSound('/assets/sounds/wrong-answer.mp3'); // Play wrong answer sound
     }
   }
 
   // Proceed to the next question or show results if the quiz is completed
   nextQuestion(): void {
     if (this.selectedOption === this.correctAnswer) {
-      this.correctAnswersCount++;  // Increment correct answers count if the user answered correctly
+      this.correctAnswersCount++; // Increment correct answers count if the user answered correctly
     }
 
     if (this.currentQuestionIndex < this.questions.length - 1) {
       this.currentQuestionIndex++;
-      this.selectedOption = '';  // Reset selected option
-      this.loadOptions();  // Load new options for the next question
-      this.playSound('/assets/sounds/next-question.mp3');  // Play sound for next question
+      this.selectedOption = ''; // Reset selected option
+      this.loadOptions(); // Load new options for the next question
+      this.playSound('/assets/sounds/next-question.mp3'); // Play sound for next question
     } else {
-      this.showResults();  // Show results when the quiz ends
+      this.showResults(); // Show results when the quiz ends
     }
   }
 
