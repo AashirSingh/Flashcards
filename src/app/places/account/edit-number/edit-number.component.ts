@@ -25,12 +25,11 @@ export class EditNumberComponent {
       console.log('New Name:', data.newNumber);
       
       // Call addName method to update Firebase
-      this.accountService.addName(
+      this.accountService.updateAccountDetails(
         'user-id', // You can get the actual user ID from AuthService
         'name',
         'user-email', // Pass the existing email or retrieve it from your service
         data.newNumber, // Pass the existing phone or retrieve it from your service
-        [] // Pass the existing items or retrieve them from your service
       ).subscribe(() => {
         console.log('Phone Number updated successfully');
       });

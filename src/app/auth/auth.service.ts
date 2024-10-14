@@ -1,7 +1,7 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, from, of } from 'rxjs';
-import { map, tap, switchMap } from 'rxjs/operators';
+import { map, tap, switchMap, take } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { User } from './user.model';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
@@ -49,6 +49,12 @@ export class AuthService implements OnDestroy {
     );
   }
 
+  get role() {
+    return this._user.asObservable().pipe(
+      map((user) => (user ? user.role : 'user'))
+    );
+  }
+
   autoLogin() {
     const storedData = localStorage.getItem('authData');
     if (!storedData) return of(false);
@@ -58,6 +64,9 @@ export class AuthService implements OnDestroy {
       tokenExpirationDate: string;
       userId: string;
       email: string;
+      role: string;
+      firstName: string;
+      lastName: string;
     };
 
     const expirationTime = new Date(parsedData.tokenExpirationDate);
@@ -65,25 +74,78 @@ export class AuthService implements OnDestroy {
 
     const user = new User(
       parsedData.userId,
+      parsedData.firstName,
+      parsedData.lastName,
       parsedData.email,
       parsedData.token,
-      expirationTime
+      expirationTime,
+      parsedData.role
     );
     this._user.next(user);
     this.autoLogout(user.tokenDuration);
-    this.configService.updateStreak(user.id); // Update streak upon auto-login
+    this.configService.updateStreak(user.id);
 
     return of(true);
   }
 
-  signup(email: string, password: string) {
+  signup(email: string, password: string, firstName: string, lastName: string, role: string = 'user') {
     return this.http
       .post<AuthResponseData>(
         `https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=${environment.firebase.apiKey}`,
         { email, password, returnSecureToken: true }
       )
-      .pipe(tap(this.setUserData.bind(this)));
+      .pipe(
+        switchMap((resData: AuthResponseData) => {
+          // Check if resData.expiresIn is defined and valid
+          const expiresIn = +resData.expiresIn || 3600; // Default to 1 hour if undefined
+          const expirationTime = new Date(new Date().getTime() + expiresIn * 1000);
+  
+          const user = new User(
+            resData.localId,
+            firstName,
+            lastName,
+            resData.email,
+            resData.idToken,
+            expirationTime,
+            role
+          );
+          this._user.next(user);
+  
+          // Write user data into the Realtime Database
+          return this.token.pipe(
+            take(1),
+            switchMap(token => {
+              const accountData = {
+                email,
+                firstName,
+                lastName,
+                role,
+                userId: resData.localId
+              };
+  
+              return this.http.put<any>(
+                `https://bookings-2bd51-default-rtdb.firebaseio.com/accounts/${resData.localId}.json?auth=${token}`,
+                accountData
+              );
+            })
+          );
+        }),
+        // After signup, store data in localStorage
+        tap((resData) => {
+          const expiresIn = +resData.expiresIn || 3600; // Ensure default expiration
+          this.storeAuthData(
+            resData.localId,
+            resData.idToken,
+            new Date(new Date().getTime() + expiresIn * 1000).toISOString(),
+            email,
+            firstName,
+            lastName,
+            role
+          );
+        })
+      );
   }
+  
 
   login(email: string, password: string) {
     return this.http
@@ -93,10 +155,51 @@ export class AuthService implements OnDestroy {
       )
       .pipe(
         tap((userData) => {
-          this.setUserData(userData);
-          this.configService.updateStreak(userData.localId); // Update streak upon login
+          // Ensure expiresIn is valid, default to 1 hour if it's undefined
+          const expiresIn = +userData.expiresIn || 3600;
+          const expirationTime = new Date(new Date().getTime() + expiresIn * 1000);
+  
+          const user = new User(
+            userData.localId,
+            'FirstName', // Replace with proper logic if needed
+            'LastName',  // Replace with proper logic if needed
+            userData.email,
+            userData.idToken,
+            expirationTime,
+            'user' // Default role
+          );
+  
+          this._user.next(user);
+          this.storeAuthData(
+            userData.localId,
+            userData.idToken,
+            expirationTime.toISOString(),
+            userData.email,
+            'FirstName',
+            'LastName',
+            'user'
+          );
+          this.autoLogout(user.tokenDuration);
+          this.configService.updateStreak(userData.localId);
         })
       );
+  }
+
+  private saveUserToDatabase(userId: string, email: string, firstName: string, lastName: string) {
+    const userData = {
+      email,
+      firstName,
+      lastName,
+      userId,
+    };
+    this.http
+      .put(
+        `https://bookings-2bd51-default-rtdb.firebaseio.com/${userId}.json`,
+        userData
+      )
+      .subscribe(() => {
+        console.log('User saved to Realtime Database');
+      });
   }
 
   loginWithGoogle() {
@@ -108,12 +211,34 @@ export class AuthService implements OnDestroy {
         }
 
         const token = await result.user.getIdToken();
+        const tokenResult = await result.user.getIdTokenResult();
+        const role = tokenResult.claims['role'] || 'user';  
         const expirationTime = new Date(new Date().getTime() + 3600 * 1000);
-        const user = new User(result.user.uid!, result.user.email!, token, expirationTime);
+
+        const displayName = result.user.displayName || '';
+        const [firstName, lastName] = displayName.split(' ');  
+
+        const user = new User(
+          result.user.uid!,
+          firstName || 'FirstName',  
+          lastName || 'LastName',    
+          result.user.email!,
+          token,
+          expirationTime,
+          role
+        );
         this._user.next(user);
-        this.storeAuthData(user.id, token, expirationTime.toISOString(), user.email!);
+        this.storeAuthData(
+          user.id, 
+          token, 
+          expirationTime.toISOString(), 
+          user.email!, 
+          role, 
+          firstName, 
+          lastName
+        );
         this.autoLogout(user.tokenDuration);
-        this.configService.updateStreak(user.id); // Update streak after Google login
+        this.configService.updateStreak(user.id);
         return user;
       })
     );
@@ -131,11 +256,15 @@ export class AuthService implements OnDestroy {
     const expirationTime = new Date(
       new Date().getTime() + +userData.expiresIn * 1000
     );
+    const role = 'user'; 
     const user = new User(
       userData.localId,
+      'FirstName',  
+      'LastName',   
       userData.email,
       userData.idToken,
-      expirationTime
+      expirationTime,
+      role
     );
     this._user.next(user);
     this.autoLogout(user.tokenDuration);
@@ -143,7 +272,10 @@ export class AuthService implements OnDestroy {
       userData.localId,
       userData.idToken,
       expirationTime.toISOString(),
-      userData.email
+      userData.email,
+      role,
+      'FirstName',  
+      'LastName'    
     );
   }
 
@@ -151,9 +283,12 @@ export class AuthService implements OnDestroy {
     userId: string,
     token: string,
     tokenExpirationDate: string,
-    email: string
+    email: string,
+    role: string,
+    firstName: string,
+    lastName: string
   ) {
-    const data = JSON.stringify({ userId, token, tokenExpirationDate, email });
+    const data = JSON.stringify({ userId, token, tokenExpirationDate, email, role, firstName, lastName });
     localStorage.setItem('authData', data);
   }
 
