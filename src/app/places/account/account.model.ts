@@ -1,11 +1,11 @@
 export class Account {
   constructor(
-    public id: string,
-    public userId: string,
-    public name: string,
+    public id: string, // Firebase Realtime Database key
+    public userId: string, // Same as Firebase Authentication UID
+    public firstName: string,
+    public lastName: string,
     public email: string,
-    public phone: string,
-    public items: any[] = [],
-    public role: string 
+    public items: any[] = [], // An array of items associated with the user (optional)
+    public role: string // 'user' or 'admin' (default 'user')
   ) {}
 }
