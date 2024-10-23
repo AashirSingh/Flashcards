@@ -252,10 +252,11 @@ export class AuthService implements OnDestroy {
     this.afAuth.signOut();
   }
 
-  updateAccountDetails(userId: string, firstName: string, lastName: string): Observable<void> {
+  updateAccountDetails(userId: string, firstName: string, lastName: string, email: string): Observable<void> {
     return from(this.firestore.collection('users').doc(userId).update({
       firstName: firstName,
-      lastName: lastName
+      lastName: lastName,
+      email: email
     })).pipe(
       tap(() => {
         this._user.pipe(take(1)).subscribe(user => {
@@ -264,7 +265,7 @@ export class AuthService implements OnDestroy {
               user.id,
               firstName,
               lastName,
-              user.email,
+              email,
               user.token!,
               user.tokenExpirationDate,
               user.role
