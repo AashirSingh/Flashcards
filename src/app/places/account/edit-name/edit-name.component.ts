@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { AccountService } from '../account.service'; // Ensure the service is properly imported
-import { AuthService } from '../../../auth/auth.service'; // Import AuthService to fetch user details
-import { take } from 'rxjs/operators'; // Import take for best practice subscription
+import { AccountService } from '../account.service'; 
+import { AuthService } from '../../../auth/auth.service'; 
+import { take } from 'rxjs/operators'; 
 
 @Component({
   selector: 'app-edit-name',
@@ -14,14 +14,12 @@ export class EditNameComponent {
   constructor(
     private modalCtrl: ModalController,
     private accountService: AccountService,
-    private authService: AuthService // Inject AuthService
+    private authService: AuthService
   ) {}
 
   async openNameModal() {
-    // Best practice: subscribe to the userId and use take(1) to retrieve it once
     this.authService.userId.pipe(take(1)).subscribe(userId => {
       if (userId) {
-        // Fetch user's current details from your AccountService
         this.accountService.fetchAccount().pipe(take(1)).subscribe(accounts => {
           const account = accounts.find(acc => acc.userId === userId);
           if (account) {
@@ -45,13 +43,12 @@ export class EditNameComponent {
 
     const { data } = await modal.onWillDismiss();
     if (data && data.firstName && data.lastName) {
-      // Call updateAccountDetails method to update Firebase
       this.accountService.updateAccountDetails(
-        user.userId,  // Correct the user ID
-        data.firstName,  // Updated first name
-        data.lastName,   // Updated last name
-        user.email,  // Keep the same email
-        user.role    // Keep the role the same
+        user.userId,
+        data.firstName,
+        data.lastName,
+        user.email,
+        user.role
       ).subscribe(() => {
         console.log('Account updated successfully');
       });
@@ -59,7 +56,7 @@ export class EditNameComponent {
   }
 }
 
-// Inline NameModalContent component for name update
+// NameModalContent component for editing names
 @Component({
   template: `
     <ion-header>
@@ -95,7 +92,7 @@ export class NameModalContent {
   }
 
   submit() {
-    if (this.firstName && this.lastName) { // Ensure both fields are filled
+    if (this.firstName && this.lastName) {
       this.modalCtrl.dismiss({ firstName: this.firstName, lastName: this.lastName });
     }
   }

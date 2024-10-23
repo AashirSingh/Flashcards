@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { LoadingController, AlertController } from '@ionic/angular';
 import { Observable } from 'rxjs';
-import { AuthService, AuthResponseData } from './auth.service';
+import { AuthService } from './auth.service';
+import { User } from './user.model';
 
 @Component({
   selector: 'app-auth',
@@ -21,20 +22,25 @@ export class AuthPage {
     private alertCtrl: AlertController
   ) {}
 
-  authenticate(form: NgForm, email: string, password: string) {
+  authenticate(form: NgForm, email: string, password: string, firstName?: string, lastName?: string) {
     this.isLoading = true;
     this.loadingCtrl
-      .create({ keyboardClose: true, message: 'Logging in...' })
+      .create({ keyboardClose: true, message: this.isLogin ? 'Logging in...' : 'Signing up...' })
       .then(loadingEl => {
         loadingEl.present();
-        let authObs: Observable<AuthResponseData>;
+        let authObs: Observable<User>;
+
         if (this.isLogin) {
           authObs = this.authService.login(email, password);
         } else {
-          authObs = this.authService.signup(email, password, form.value.firstName, form.value.lastName);
+          console.log('First Name:', firstName);
+          console.log('Last Name:', lastName);
+          
+          authObs = this.authService.signup(email, password, firstName!, lastName!);
         }
+
         authObs.subscribe(
-          resData => {
+          () => {
             this.isLoading = false;
             loadingEl.dismiss();
             this.router.navigateByUrl('/places/tabs/discover');
@@ -42,13 +48,12 @@ export class AuthPage {
           errRes => {
             this.isLoading = false;
             loadingEl.dismiss();
-  
-            // Check if the structure contains the error message, and handle it gracefully
+
             let message = 'Could not sign you up, please try again.';
             
             if (errRes && errRes.error && errRes.error.error) {
               const code = errRes.error.error.message;
-  
+
               if (code === 'EMAIL_EXISTS') {
                 message = 'This email address exists already!';
               } else if (code === 'EMAIL_NOT_FOUND') {
@@ -57,15 +62,13 @@ export class AuthPage {
                 message = 'This password is not correct.';
               }
             } else {
-              // Handle other cases where errRes might not have an error structure
               message = errRes.message || 'An unknown error occurred!';
             }
             this.showAlert(message);
           }
         );
       });
-  }
-  
+  }  
 
   onSwitchAuthMode() {
     this.isLogin = !this.isLogin;
@@ -77,9 +80,15 @@ export class AuthPage {
     }
     const email = form.value.email;
     const password = form.value.password;
-  
-    // Use the authenticate method, which already handles login/signup
-    this.authenticate(form, email, password);
+    const firstName = form.value.firstName;
+    const lastName = form.value.lastName;
+
+    if (this.isLogin) {
+      this.authenticate(form, email, password);
+    } else {
+      this.authenticate(form, email, password, firstName, lastName);
+    }
+    
     form.reset();
   }
 
@@ -96,7 +105,7 @@ export class AuthPage {
   onLoginWithGoogle() {
     this.isLoading = true;
     this.authService.loginWithGoogle().subscribe(
-      resData => {
+      () => {
         this.isLoading = false;
         this.router.navigateByUrl('/places/tabs/discover');
       },

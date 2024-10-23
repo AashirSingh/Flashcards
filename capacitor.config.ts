@@ -2,7 +2,7 @@ import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'io.ionic.starter',  // Replace with your actual app ID if necessary
-  appName: 'bookings',
+  appName: 'StudyStack',
   webDir: 'www',  // Make sure this matches your Ionic build output directory
   bundledWebRuntime: false,  // Set to true if you want to bundle the Capacitor runtime
   // Optional: Add server config for live reload during development (if needed)

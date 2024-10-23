@@ -6,26 +6,30 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ConfigService } from './config.service';
+
 // Import AngularFire modules
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-import { environment } from '../environments/environment';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore'; // Import Firestore module
 import { StorageModule } from '@ngx-pwa/local-storage';
 
+// Import environment settings
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
-    StorageModule.forRoot({}), // <-- Corrected: Add parentheses here
+    StorageModule.forRoot({}), // Initialize storage module
     IonicModule.forRoot(),
     AppRoutingModule,
-    // Initialize Firebase with your environment settings
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule
+    AngularFireModule.initializeApp(environment.firebase), // Firebase initialization
+    AngularFireAuthModule, // Firebase Authentication
+    AngularFirestoreModule // Firebase Firestore
   ],
-  providers: [ConfigService,
+  providers: [
+    ConfigService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

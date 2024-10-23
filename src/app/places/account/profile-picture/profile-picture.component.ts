@@ -11,7 +11,6 @@ export class ProfilePictureComponent  implements OnInit {
   @Input() imageUrl: string = '';
   @Input() name: string = '';
   @Input() email: string = '';
-  @Input() phone: string = '';
 
   constructor() { }
 
