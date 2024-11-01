@@ -1,0 +1,17 @@
+ion-content {
+    --padding-start: 16px;
+    --padding-end: 16px;
+  }
+  
+  .topic-item {
+    margin: 12px 0;
+    padding: 1px;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .topic-item h2 {
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+  

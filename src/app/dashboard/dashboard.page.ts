@@ -13,6 +13,7 @@ import { ModalController } from '@ionic/angular';
 })
 export class DashboardPage implements OnInit {
   courses: Course[] = [];
+  userRole: string = 'user';  // Default role is 'user'
 
   constructor(
     private configService: ConfigService,
@@ -31,42 +32,27 @@ export class DashboardPage implements OnInit {
     const modal = await this.modalController.create({
       component: CreateCourseComponent,
     });
-  
+
     modal.onDidDismiss().then(() => {
       this.loadCourses();  // Refresh the course list
     });
-  
+
     return await modal.present();
   }
 
   ngOnInit() {
-    this.configService.getCourses().subscribe(courses => {
-      if (courses.length > 0) {
-        this.courses = courses;
-      } else {
-        console.error('No courses found.');
-      }
-    });
+    this.loadCourses();
   }
 
   loadCourses() {
     this.configService.getCourses().subscribe(courses => {
       if (courses.length > 0) {
         this.courses = courses;
+        console.log('Courses loaded:', this.courses); // Add logging for debugging
       } else {
         console.error('No courses found.');
       }
     });
-  }
-
-  // Navigation to flashcard
-  goToFlashcard(mode: string, courseId: string) {
-    this.router.navigate(['/flashcard', mode, courseId]);
-  }
-
-  // Navigation to quiz
-  goToQuiz(courseId: string) {
-    this.router.navigate(['/quiz', courseId]);
   }
 
   logout() {

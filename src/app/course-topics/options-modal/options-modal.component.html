@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Options</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div style="text-align: center; margin-top: 20px;">
+    <ion-button color="warning" style="margin: 10px;" (click)="selectOption('practice')">+ Practice</ion-button>
+    <ion-button color="warning" style="margin: 10px;" (click)="selectOption('study')">- Study</ion-button>
+    <ion-button color="warning" style="margin: 10px;" (click)="selectOption('quiz')">+ Quiz</ion-button>
+  </div>
+</ion-content>

@@ -1,20 +1,37 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
-import { Observable, from } from 'rxjs';
-import { Course } from './shared/models/course.model';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Course, Topic } from './shared/models/course.model';  // Import the updated Course and Topic models
 
 const supabaseUrl = 'https://muuaktpmdgrchhrjkqcu.supabase.co';  // Replace with your actual Project URL
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im11dWFrdHBtZGdyY2hocmprcWN1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjQ4NzQwMjAsImV4cCI6MjA0MDQ1MDAyMH0.UjXLTdzJTQJ-KqMGtcoSvQeYdYGcx2la7ZjKPFe53x4';  // Replace with your actual Anon Key
+const supabaseKey = 'YOUR_SUPABASE_KEY';
 const supabase: SupabaseClient = createClient(supabaseUrl, supabaseKey);
 
 @Injectable({
   providedIn: 'root'
 })
 export class ConfigService {
+  private readonly topicsUrl = 'assets/topics.json';  // Path to the JSON file
 
-  // Get the list of courses
+  constructor(private http: HttpClient) {}
+
+  // Get the list of courses from the JSON file
   getCourses(): Observable<Course[]> {
-    return from(this.fetchCoursesFromSupabase());
+    return this.http.get<{ courses: Course[] }>(this.topicsUrl).pipe(
+      map(response => response.courses)
+    );
+  }
+
+  // Get topics for a specific course by courseId from the JSON file
+  getCourseTopics(courseId: number): Observable<Topic[]> {
+    return this.http.get<{ courses: Course[] }>(this.topicsUrl).pipe(
+      map(response => {
+        const course = response.courses.find(c => c.id === courseId);
+        return course?.topics || [];
+      })
+    );
   }
 
   // Fetch courses from Supabase
@@ -114,7 +131,6 @@ export class ConfigService {
   async updateStreak(userId: string): Promise<number> {
     const localToday = new Date().toLocaleDateString('en-CA'); // User's local date in YYYY-MM-DD format
 
-    // Fetch current streak and personal best
     const { data: userStreakData, error } = await supabase
       .from('user_streaks')
       .select('last_streak_update, streak, personal_best')
@@ -123,52 +139,49 @@ export class ConfigService {
 
     if (error && error.code !== 'PGRST116') {
       console.error('Error fetching streak:', error);
-      return 0;  // Return a default value if there is an error
+      return 0;
     }
 
     if (userStreakData && userStreakData.last_streak_update === localToday) {
       console.log('Streak already updated today, no changes made');
-      return userStreakData.streak;  // Return the current streak if already updated
+      return userStreakData.streak;
     }
 
-    let newStreak = 1; // Default streak for a new record
+    let newStreak = 1;
     let personalBest = userStreakData?.personal_best || 0;
 
     if (userStreakData) {
       const lastLoginDate = new Date(userStreakData.last_streak_update).toLocaleDateString('en-CA');
 
       if (new Date(localToday).getTime() - new Date(lastLoginDate).getTime() === 86400000) {
-        newStreak = userStreakData.streak + 1; // Increment streak if consecutive day
+        newStreak = userStreakData.streak + 1;
       } else if (new Date(localToday).getTime() - new Date(lastLoginDate).getTime() > 86400000) {
-        newStreak = 1; // Reset streak to 1 if missed more than a day
+        newStreak = 1;
       }
 
-      // Check if the current streak exceeds the personal best
       if (newStreak > personalBest) {
         personalBest = newStreak;
       }
     }
 
-    // Log to confirm correct values before updating
     console.log(`Updating user ${userId} with streak: ${newStreak}, personal best: ${personalBest}`);
 
-    // Upsert data into the Supabase table
     const { error: upsertError } = await supabase
       .from('user_streaks')
       .upsert({
         user_id: userId,
         streak: newStreak,
-        personal_best: personalBest, // Ensure personal best is being updated
+        personal_best: personalBest,
         last_streak_update: localToday
       }, { onConflict: 'user_id' });
 
     if (upsertError) {
       console.error('Error updating streak and personal best:', upsertError);
-      return 0;  // Return a default value if there is an error updating
+      return 0;
     }
 
     console.log(`Streak updated successfully. Current streak: ${newStreak}, Personal best: ${personalBest}`);
-    return newStreak;  // Return the updated streak
+    return newStreak;
   }
 
   // Retrieve the personal best streak for a user
@@ -205,7 +218,6 @@ export class ConfigService {
 
   // Get hardcoded leaderboard data for testing
   async getLeaderboard(): Promise<{ username: string, correctAnswers: number }[]> {
-    // Return some hardcoded data for testing purposes
     return [
       { username: 'User1', correctAnswers: 15 },
       { username: 'User2', correctAnswers: 20 },

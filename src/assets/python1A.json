@@ -1,0 +1,1234 @@
+{
+    "Python1A": [
+      {
+        "topic": "Variables: Introduction to Strings, Integers, Floats, and Booleans",
+        "questions": [
+          {
+            "question": "What is a variable in Python?",
+            "options": [
+              "A constant value that cannot change",
+              "A container for storing data values",
+              "A data type used for mathematical operations",
+              "A special character in Python"
+            ],
+            "correct_answer": "A container for storing data values"
+          },
+          {
+            "question": "How do you define a string variable in Python?",
+            "options": [
+              "name = 25",
+              "name = \"John\"",
+              "name = True",
+              "name = 3.14"
+            ],
+            "correct_answer": "name = \"John\""
+          },
+          {
+            "question": "Which data type would you use to store the value True or False?",
+            "options": [
+              "Integer",
+              "String",
+              "Boolean",
+              "Float"
+            ],
+            "correct_answer": "Boolean"
+          },
+          {
+            "question": "What is the difference between an integer and a float?",
+            "options": [
+              "Integers are whole numbers, floats are decimal numbers",
+              "Floats are whole numbers, integers are decimal numbers",
+              "Both are the same data type in Python",
+              "Integers store characters, floats store numbers"
+            ],
+            "correct_answer": "Integers are whole numbers, floats are decimal numbers"
+          },
+          {
+            "question": "What is the correct syntax to create a variable named age and set it to 25?",
+            "options": [
+              "int age = 25",
+              "age = 25",
+              "variable age = 25",
+              "25 = age"
+            ],
+            "correct_answer": "age = 25"
+          },
+          {
+            "question": "What type of data is \"Hello, World!\"?",
+            "options": [
+              "Integer",
+              "Float",
+              "String",
+              "Boolean"
+            ],
+            "correct_answer": "String"
+          },
+          {
+            "question": "Which of these is a valid variable name: 1st_value, first_value, first-value, firstValue?",
+            "options": [
+              "1st_value",
+              "first_value",
+              "first-value",
+              "None of the above"
+            ],
+            "correct_answer": "first_value"
+          },
+          {
+            "question": "How do you create a float variable with a value of 3.14?",
+            "options": [
+              "value = 3,14",
+              "value = \"3.14\"",
+              "value = 3.14",
+              "value = float(3.14)"
+            ],
+            "correct_answer": "value = 3.14"
+          },
+          {
+            "question": "How do you create a boolean variable named is_student and set it to True?",
+            "options": [
+              "is_student = \"True\"",
+              "is_student = True",
+              "is_student = 1",
+              "is_student = \"False\""
+            ],
+            "correct_answer": "is_student = True"
+          },
+          {
+            "question": "Which symbol is used to assign a value to a variable?",
+            "options": [
+              "==",
+              ":=",
+              "=",
+              "=>"
+            ],
+            "correct_answer": "="
+          },
+          {
+            "question": "What is the correct way to create a string variable with the value \"Python\"?",
+            "options": [
+              "str = Python",
+              "str = 'Python'",
+              "str = 5",
+              "str = 3.14"
+            ],
+            "correct_answer": "str = 'Python'"
+          },
+          {
+            "question": "Can a variable name start with a number? (Yes/No)",
+            "options": [
+              "Yes",
+              "No",
+              "Only in Python 3",
+              "Only with an underscore"
+            ],
+            "correct_answer": "No"
+          },
+          {
+            "question": "How do you create a boolean variable named has_passed and set it to False?",
+            "options": [
+              "has_passed = \"False\"",
+              "has_passed = False",
+              "has_passed = 0",
+              "has_passed = \"No\""
+            ],
+            "correct_answer": "has_passed = False"
+          },
+          {
+            "question": "Which data type would be best for storing a person’s age?",
+            "options": [
+              "String",
+              "Boolean",
+              "Float",
+              "Integer"
+            ],
+            "correct_answer": "Integer"
+          },
+          {
+            "question": "How do you create a float variable with the value 7.5?",
+            "options": [
+              "number = 7,5",
+              "number = '7.5'",
+              "number = 7.5",
+              "float number = 7.5"
+            ],
+            "correct_answer": "number = 7.5"
+          },
+          {
+            "question": "Which of these is a valid way to name a variable?",
+            "options": [
+              "my-variable",
+              "my_variable",
+              "2ndValue",
+              "value#1"
+            ],
+            "correct_answer": "my_variable"
+          },
+          {
+            "question": "Which keyword would you use to assign a value of True to a boolean variable named is_ready?",
+            "options": [
+              "is_ready = \"True\"",
+              "is_ready = True",
+              "is_ready = 1",
+              "is_ready = \"False\""
+            ],
+            "correct_answer": "is_ready = True"
+          },
+          {
+            "question": "What value will the variable price hold after the following code: price = 10.99?",
+            "options": [
+              "Integer",
+              "Float",
+              "String",
+              "Boolean"
+            ],
+            "correct_answer": "Float"
+          },
+          {
+            "question": "Which of these is a correct assignment statement for a string value?",
+            "options": [
+              "fruit = banana",
+              "fruit = \"banana\"",
+              "fruit := banana",
+              "fruit = 10"
+            ],
+            "correct_answer": "fruit = \"banana\""
+          },
+          {
+            "question": "How would you define a variable named grade and set it to 95?",
+            "options": [
+              "var grade = 95",
+              "grade := 95",
+              "grade = 95",
+              "int grade = 95"
+            ],
+            "correct_answer": "grade = 95"
+          }
+        ]
+      },
+      {
+        "topic": "Print Statements and Combining Different Data Types",
+        "questions": [
+          {
+            "question": "How do you print a message to the console in Python?",
+            "options": [
+              "console.log(\"Hello\")",
+              "echo \"Hello\"",
+              "print(\"Hello\")",
+              "output(\"Hello\")"
+            ],
+            "correct_answer": "print(\"Hello\")"
+          },
+          {
+            "question": "What is the output of print(\"Hello\" + \"World\")?",
+            "options": [
+              "Hello World",
+              "HelloWorld",
+              "Hello+World",
+              "\"Hello\" + \"World\""
+            ],
+            "correct_answer": "HelloWorld"
+          },
+          {
+            "question": "How can you combine an integer and a string in a print statement?",
+            "options": [
+              "Use a plus (+) sign",
+              "Convert the integer to a string using str()",
+              "Use a comma (,)",
+              "Both B and C"
+            ],
+            "correct_answer": "Both B and C"
+          },
+          {
+            "question": "What will happen if you try to print an integer and a string without converting the integer?",
+            "options": [
+              "The program will crash",
+              "You will get a TypeError",
+              "It will concatenate the integer and string",
+              "It will print the integer first, then the string"
+            ],
+            "correct_answer": "You will get a TypeError"
+          },
+          {
+            "question": "How do you print a string followed by a new line in Python?",
+            "options": [
+              "Use print() without specifying end",
+              "Use print(\"Hello\\n\")",
+              "Use print(\"Hello\", end=\"\\n\")",
+              "All of the above"
+            ],
+            "correct_answer": "Use print() without specifying end"
+          },
+          {
+            "question": "What is the purpose of the print() function?",
+            "options": [
+              "To read input from the user",
+              "To write data to a file",
+              "To display output to the console",
+              "To create a new line in code"
+            ],
+            "correct_answer": "To display output to the console"
+          },
+          {
+            "question": "How do you include a variable’s value within a string in Python?",
+            "options": [
+              "Use % formatting",
+              "Use + to concatenate",
+              "Use f-strings",
+              "All of the above"
+            ],
+            "correct_answer": "All of the above"
+          },
+          {
+            "question": "What is the output of print(\"The result is:\", 5 + 3)?",
+            "options": [
+              "The result is: 8",
+              "The result is 8",
+              "8",
+              "The result is:"
+            ],
+            "correct_answer": "The result is: 8"
+          },
+          {
+            "question": "Can you use print() to output multiple values separated by commas? (Yes/No)",
+            "options": [
+              "Yes",
+              "No",
+              "Only in Python 3",
+              "Only in Python 2"
+            ],
+            "correct_answer": "Yes"
+          },
+          {
+            "question": "What is the output of print(\"Number:\", 10, \"Float:\", 3.14)?",
+            "options": [
+              "Number: 10 Float: 3.14",
+              "Number 10 Float 3.14",
+              "Number10Float3.14",
+              "Error"
+            ],
+            "correct_answer": "Number: 10 Float: 3.14"
+          },
+          {
+            "question": "How do you print double quotes within a string in Python?",
+            "options": [
+              "Use single quotes to define the string",
+              "Use backslashes \\\"",
+              "Use triple quotes \"\"\"...\"\"\"",
+              "All of the above"
+            ],
+            "correct_answer": "All of the above"
+          },
+          {
+            "question": "What is the output of print(\"Hello\", end=\"!\")?",
+            "options": [
+              "Hello!",
+              "Hello",
+              "Hello!",
+              "!Hello"
+            ],
+            "correct_answer": "Hello!"
+          },
+          {
+            "question": "How do you add a tab space when printing a string?",
+            "options": [
+              "Use \\t within the string",
+              "Use print(\"String\", end=\"\\t\")",
+              "Use \t within the string",
+              "Use tab()"
+            ],
+            "correct_answer": "Use \\t within the string"
+          },
+          {
+            "question": "What will be the result of print(\"Value:\", 7 * 3)?",
+            "options": [
+              "Value: 10",
+              "Value: 21",
+              "Value: 73",
+              "Value: 7*3"
+            ],
+            "correct_answer": "Value: 21"
+          },
+          {
+            "question": "Can you print a list using the print() function? (Yes/No)",
+            "options": [
+              "Yes",
+              "No",
+              "Only with a loop",
+              "Only in Python 2"
+            ],
+            "correct_answer": "Yes"
+          },
+          {
+            "question": "What is the output of print(5, \"*\", 2, \"=\", 5 * 2)?",
+            "options": [
+              "5 * 2 = 10",
+              "5*2=10",
+              "5 * 2 10",
+              "Error"
+            ],
+            "correct_answer": "5 * 2 = 10"
+          },
+          {
+            "question": "How do you concatenate two strings with a space between them?",
+            "options": [
+              "print(\"Hello\" + \" \" + \"World\")",
+              "print(\"Hello\", \"World\")",
+              "print(\"Hello\" + \"World\")",
+              "Both A and B"
+            ],
+            "correct_answer": "Both A and B"
+          },
+          {
+            "question": "What is the output of: x = 10; print(f\"The value of x is {x}\")?",
+            "options": [
+              "The value of x is {x}",
+              "The value of x is 10",
+              "The value of x: x",
+              "Error"
+            ],
+            "correct_answer": "The value of x is 10"
+          },
+          {
+            "question": "How can you print a multi-line string?",
+            "options": [
+              "Use \\n to create new lines",
+              "Use triple quotes \"\"\"...\"\"\"",
+              "Use single quotes with \\n",
+              "Both A and B"
+            ],
+            "correct_answer": "Both A and B"
+          },
+          {
+            "question": "How do you print a formatted string that contains an integer and a float?",
+            "options": [
+              "print(\"Integer:\", 5, \"Float:\", 3.14)",
+              "print(\"Integer: %d, Float: %.2f\" % (5, 3.14))",
+              "print(f\"Integer: {5}, Float: {3.14}\")",
+              "All of the above"
+            ],
+            "correct_answer": "All of the above"
+          }
+        ]
+      },
+      {
+        "topic": "Data Type Conversion and Operators",
+        "questions": [
+          {
+            "question": "How do you convert a string '123' to an integer?",
+            "options": [
+              "str(\"123\")",
+              "int(\"123\")",
+              "float(\"123\")",
+              "bool(\"123\")"
+            ],
+            "correct_answer": "int(\"123\")"
+          },
+          {
+            "question": "What does the int() function do in Python?",
+            "options": [
+              "Converts a number to a float",
+              "Converts a string or float to an integer",
+              "Converts a boolean to a string",
+              "Converts an integer to a list"
+            ],
+            "correct_answer": "Converts a string or float to an integer"
+          },
+          {
+            "question": "How do you convert an integer to a float?",
+            "options": [
+              "float()",
+              "str()",
+              "int()",
+              "bool()"
+            ],
+            "correct_answer": "float()"
+          },
+          {
+            "question": "What is the result of float(\"3.14\")?",
+            "options": [
+              "3",
+              "3.14",
+              "\"3.14\"",
+              "Error"
+            ],
+            "correct_answer": "3.14"
+          },
+          {
+            "question": "How do you convert the boolean value True to an integer?",
+            "options": [
+              "bool(True)",
+              "int(True)",
+              "str(True)",
+              "float(True)"
+            ],
+            "correct_answer": "int(True)"
+          },
+          {
+            "question": "Which function is used to convert an integer to a string?",
+            "options": [
+              "int()",
+              "str()",
+              "float()",
+              "bool()"
+            ],
+            "correct_answer": "str()"
+          },
+          {
+            "question": "What is the result of int(5.9)?",
+            "options": [
+              "6",
+              "5",
+              "5.9",
+              "Error"
+            ],
+            "correct_answer": "5"
+          },
+          {
+            "question": "How do you convert '100' to a float?",
+            "options": [
+              "int(\"100\")",
+              "str(\"100\")",
+              "float(\"100\")",
+              "bool(\"100\")"
+            ],
+            "correct_answer": "float(\"100\")"
+          },
+          {
+            "question": "What is the difference between == and = in Python?",
+            "options": [
+              "== is used for assignment, = is for comparison",
+              "= is used for assignment, == is for comparison",
+              "Both are used for assignment",
+              "Both are used for comparison"
+            ],
+            "correct_answer": "= is used for assignment, == is for comparison"
+          },
+          {
+            "question": "What does the != operator check for?",
+            "options": [
+              "Equality",
+              "Inequality",
+              "Assignment",
+              "Greater than"
+            ],
+            "correct_answer": "Inequality"
+          },
+          {
+            "question": "How do you convert a float value 10.5 to an integer?",
+            "options": [
+              "int(10.5)",
+              "float(10.5)",
+              "str(10.5)",
+              "bool(10.5)"
+            ],
+            "correct_answer": "int(10.5)"
+          },
+          {
+            "question": "What is the result of the expression str(42) + ' apples'?",
+            "options": [
+              "42 apples",
+              "\"42 apples\"",
+              "42apples",
+              "\"42\" + \" apples\""
+            ],
+            "correct_answer": "\"42 apples\""
+          },
+          {
+            "question": "What is the output of bool(0)?",
+            "options": [
+              "True",
+              "False",
+              "0",
+              "Error"
+            ],
+            "correct_answer": "False"
+          },
+          {
+            "question": "How do you check if two values are equal?",
+            "options": [
+              "=",
+              "==",
+              "!=",
+              "equals()"
+            ],
+            "correct_answer": "=="
+          },
+          {
+            "question": "How do you convert a list to a string?",
+            "options": [
+              "list()",
+              "str(list)",
+              "\",\".join(list)",
+              "convert(list)"
+            ],
+            "correct_answer": "\",\".join(list)"
+          },
+          {
+            "question": "What is the output of int(\"15\") + float(\"3.5\")?",
+            "options": [
+              "18.5",
+              "153.5",
+              "Error",
+              "15.3"
+            ],
+            "correct_answer": "18.5"
+          },
+          {
+            "question": "How do you convert the integer 5 to a binary string?",
+            "options": [
+              "bin(5)",
+              "int(5)",
+              "binary(5)",
+              "convert(5)"
+            ],
+            "correct_answer": "bin(5)"
+          },
+          {
+            "question": "What is the result of float(True)?",
+            "options": [
+              "0.0",
+              "1.0",
+              "True",
+              "Error"
+            ],
+            "correct_answer": "1.0"
+          },
+          {
+            "question": "Which operator is used to check if two values are not equal?",
+            "options": [
+              "==",
+              "!=",
+              "<>",
+              "not="
+            ],
+            "correct_answer": "!="
+          },
+          {
+            "question": "What is the output of hex(255)?",
+            "options": [
+              "0x255",
+              "ff",
+              "0xff",
+              "255h"
+            ],
+            "correct_answer": "0xff"
+          }
+        ]
+      },
+      {
+        "topic": "Input Statements and If Conditions",
+        "questions": [
+          {
+            "question": "How do you collect user input in Python?",
+            "options": [
+              "console.input()",
+              "input()",
+              "get()",
+              "read()"
+            ],
+            "correct_answer": "input()"
+          },
+          {
+            "question": "What is the output type of input() by default?",
+            "options": [
+              "integer",
+              "float",
+              "string",
+              "boolean"
+            ],
+            "correct_answer": "string"
+          },
+          {
+            "question": "How do you convert user input to an integer?",
+            "options": [
+              "str(input())",
+              "int(input())",
+              "float(input())",
+              "bool(input())"
+            ],
+            "correct_answer": "int(input())"
+          },
+          {
+            "question": "What does an if statement do?",
+            "options": [
+              "Loops through code multiple times",
+              "Executes code if a specified condition is true",
+              "Converts data types",
+              "Reads input from a user"
+            ],
+            "correct_answer": "Executes code if a specified condition is true"
+          },
+          {
+            "question": "What is the purpose of the elif keyword?",
+            "options": [
+              "To start a new function",
+              "To provide an alternative condition to check if the if statement is false",
+              "To end an if statement",
+              "To execute a loop"
+            ],
+            "correct_answer": "To provide an alternative condition to check if the if statement is false"
+          },
+          {
+            "question": "How do you write an if statement that checks if x is greater than 10?",
+            "options": [
+              "if x = 10:",
+              "if x > 10:",
+              "if (x > 10)",
+              "if x < 10"
+            ],
+            "correct_answer": "if x > 10:"
+          },
+          {
+            "question": "What will happen if the condition in an if statement is False?",
+            "options": [
+              "The code inside the if block will execute",
+              "The program will stop",
+              "The code inside the if block will be skipped",
+              "An error will occur"
+            ],
+            "correct_answer": "The code inside the if block will be skipped"
+          },
+          {
+            "question": "How do you execute code if none of the if or elif conditions are true?",
+            "options": [
+              "Use default",
+              "Use otherwise",
+              "Use else",
+              "Use end"
+            ],
+            "correct_answer": "Use else"
+          },
+          {
+            "question": "How do you collect a float value from the user?",
+            "options": [
+              "float(input())",
+              "int(input())",
+              "input()",
+              "str(input())"
+            ],
+            "correct_answer": "float(input())"
+          },
+          {
+            "question": "What is the output of if 5 > 3: print(\"Yes\")?",
+            "options": [
+              "No",
+              "True",
+              "Yes",
+              "Error"
+            ],
+            "correct_answer": "Yes"
+          },
+          {
+            "question": "How do you use input() to collect a user's name?",
+            "options": [
+              "name = read()",
+              "name = input()",
+              "name = str()",
+              "name = console.input()"
+            ],
+            "correct_answer": "name = input()"
+          },
+          {
+            "question": "What is the difference between if and elif?",
+            "options": [
+              "elif starts a new condition while if ends it",
+              "elif is executed if if is false, while if is the initial condition",
+              "There is no difference",
+              "if is used inside loops, while elif is not"
+            ],
+            "correct_answer": "elif is executed if if is false, while if is the initial condition"
+          },
+          {
+            "question": "How do you nest an if statement inside another if?",
+            "options": [
+              "Indent the second if statement inside the first if block",
+              "Use elif",
+              "Use else",
+              "Place the second if on the same line"
+            ],
+            "correct_answer": "Indent the second if statement inside the first if block"
+          },
+          {
+            "question": "What will happen if you use else without an if?",
+            "options": [
+              "The code will run normally",
+              "The program will generate an error",
+              "The else block will be ignored",
+              "The else will act as an independent block"
+            ],
+            "correct_answer": "The program will generate an error"
+          },
+          {
+            "question": "How do you write an if-elif-else structure?",
+            "options": [
+              "if... then... else...",
+              "if... elif... else...",
+              "if... elseif... end",
+              "if... elif"
+            ],
+            "correct_answer": "if... elif... else..."
+          },
+          {
+            "question": "What is the output if x = 5 and the code is if x > 10: print(\"High\") else: print(\"Low\")?",
+            "options": [
+              "High",
+              "Low",
+              "Error",
+              "No output"
+            ],
+            "correct_answer": "Low"
+          },
+          {
+            "question": "How do you check if two strings are equal?",
+            "options": [
+              "==",
+              "=",
+              "!=",
+              "equals()"
+            ],
+            "correct_answer": "=="
+          },
+          {
+            "question": "How do you use input() to collect multiple values from the user?",
+            "options": [
+              "Use split()",
+              "Use get()",
+              "Use read()",
+              "Use combine()"
+            ],
+            "correct_answer": "Use split()"
+          },
+          {
+            "question": "What is the purpose of casting in Python?",
+            "options": [
+              "To loop through values",
+              "To convert data types",
+              "To assign variables",
+              "To read user input"
+            ],
+            "correct_answer": "To convert data types"
+          },
+          {
+            "question": "How do you use if to compare a string entered by the user?",
+            "options": [
+              "if input == \"value\":",
+              "if input() = \"value\":",
+              "if input() == \"value\":",
+              "if input.equals(\"value\")"
+            ],
+            "correct_answer": "if input() == \"value\":"
+          }
+        ]
+      },
+      {
+        "topic": "Useful Python Functions and Math Operations",
+        "questions": [
+          {
+            "question": "What does the len() function do?",
+            "options": [
+              "Calculates the sum of numbers",
+              "Returns the length of an object",
+              "Returns the type of an object",
+              "Returns the last value in a list"
+            ],
+            "correct_answer": "Returns the length of an object"
+          },
+          {
+            "question": "How do you find the maximum value in a list?",
+            "options": [
+              "max(list)",
+              "list.max()",
+              "maximum(list)",
+              "max_value(list)"
+            ],
+            "correct_answer": "max(list)"
+          },
+          {
+            "question": "What is the purpose of the min() function?",
+            "options": [
+              "To return the highest value in an object",
+              "To find the median value",
+              "To return the smallest value in an object",
+              "To sort the list"
+            ],
+            "correct_answer": "To return the smallest value in an object"
+          },
+          {
+            "question": "How do you calculate the absolute value of -10?",
+            "options": [
+              "abs(10)",
+              "abs(-10)",
+              "|10|",
+              "absolute(-10)"
+            ],
+            "correct_answer": "abs(-10)"
+          },
+          {
+            "question": "What is the output of pow(2, 3)?",
+            "options": [
+              "8",
+              "6",
+              "9",
+              "16"
+            ],
+            "correct_answer": "8"
+          },
+          {
+            "question": "How do you use math.sqrt() to find the square root of 16?",
+            "options": [
+              "sqrt(16)",
+              "math.sqrt(16)",
+              "root(16)",
+              "math.root(16)"
+            ],
+            "correct_answer": "math.sqrt(16)"
+          },
+          {
+            "question": "How do you import the math module?",
+            "options": [
+              "import math",
+              "use math",
+              "math include",
+              "library(math)"
+            ],
+            "correct_answer": "import math"
+          },
+          {
+            "question": "What is the output of len(\"Python\")?",
+            "options": [
+              "7",
+              "6",
+              "5",
+              "8"
+            ],
+            "correct_answer": "6"
+          },
+          {
+            "question": "How do you use abs() to convert -5 to a positive number?",
+            "options": [
+              "abs(-5)",
+              "positive(-5)",
+              "convert(-5)",
+              "|5|"
+            ],
+            "correct_answer": "abs(-5)"
+          },
+          {
+            "question": "What does the max() function return?",
+            "options": [
+              "The smallest value",
+              "The sum of the values",
+              "The largest value",
+              "The average of the values"
+            ],
+            "correct_answer": "The largest value"
+          },
+          {
+            "question": "What is the result of min(4, 7, 1)?",
+            "options": [
+              "7",
+              "4",
+              "1",
+              "Error"
+            ],
+            "correct_answer": "1"
+          },
+          {
+            "question": "How do you use pow() to calculate 5 to the power of 2?",
+            "options": [
+              "5**2",
+              "pow(5, 2)",
+              "power(5, 2)",
+              "exp(5, 2)"
+            ],
+            "correct_answer": "pow(5, 2)"
+          },
+          {
+            "question": "What does math.sqrt(25) return?",
+            "options": [
+              "4",
+              "5",
+              "25",
+              "Error"
+            ],
+            "correct_answer": "5"
+          },
+          {
+            "question": "How do you calculate the length of a list?",
+            "options": [
+              "size(list)",
+              "count(list)",
+              "len(list)",
+              "length(list)"
+            ],
+            "correct_answer": "len(list)"
+          },
+          {
+            "question": "How do you use the len() function with a string variable?",
+            "options": [
+              "len()",
+              "len(string)",
+              "string.len()",
+              "length(string)"
+            ],
+            "correct_answer": "len(string)"
+          },
+          {
+            "question": "What is the result of abs(-3.5)?",
+            "options": [
+              "-3.5",
+              "3.5",
+              "0",
+              "Error"
+            ],
+            "correct_answer": "3.5"
+          },
+          {
+            "question": "How do you find the maximum value between two variables?",
+            "options": [
+              "max(var1, var2)",
+              "min(var1, var2)",
+              "compare(var1, var2)",
+              "greater(var1, var2)"
+            ],
+            "correct_answer": "max(var1, var2)"
+          },
+          {
+            "question": "What is the purpose of the modulus operator %?",
+            "options": [
+              "To find the quotient of two numbers",
+              "To find the remainder when dividing two numbers",
+              "To calculate the power of a number",
+              "To check equality"
+            ],
+            "correct_answer": "To find the remainder when dividing two numbers"
+          },
+          {
+            "question": "How do you find the remainder when dividing 10 by 3?",
+            "options": [
+              "10 % 3",
+              "remainder(10, 3)",
+              "10 // 3",
+              "10 / 3"
+            ],
+            "correct_answer": "10 % 3"
+          },
+          {
+            "question": "How do you calculate the power of a number without using **?",
+            "options": [
+              "power(base, exponent)",
+              "pow(base, exponent)",
+              "exp(base, exponent)",
+              "sqrt(base, exponent)"
+            ],
+            "correct_answer": "pow(base, exponent)"
+          }
+        ]
+      },
+      {
+        "topic": "Loops in Python",
+        "questions": [
+          {
+            "question": "How do you write a basic for loop in Python?",
+            "options": [
+              "for x in [0, 1, 2]:",
+              "loop x from 0 to 3",
+              "for x = 1 to 3",
+              "for (x; x < 3; x++)"
+            ],
+            "correct_answer": "for x in [0, 1, 2]:"
+          },
+          {
+            "question": "What is the purpose of a while loop?",
+            "options": [
+              "To iterate through items in a list",
+              "To repeat a block of code as long as a condition is true",
+              "To create a variable",
+              "To add items to a list"
+            ],
+            "correct_answer": "To repeat a block of code as long as a condition is true"
+          },
+          {
+            "question": "How do you loop through the numbers from 1 to 10?",
+            "options": [
+              "for i in range(1, 11):",
+              "for i = 1 to 10",
+              "loop i from 1 to 10",
+              "while i < 10"
+            ],
+            "correct_answer": "for i in range(1, 11):"
+          },
+          {
+            "question": "What does the break statement do in a loop?",
+            "options": [
+              "Skips the current iteration",
+              "Ends the loop entirely",
+              "Continues to the next iteration",
+              "Repeats the current iteration"
+            ],
+            "correct_answer": "Ends the loop entirely"
+          },
+          {
+            "question": "How do you create an infinite loop using while?",
+            "options": [
+              "while True:",
+              "while 1:",
+              "while False:",
+              "while x > 0:"
+            ],
+            "correct_answer": "while True:"
+          },
+          {
+            "question": "What is the output of for i in range(5): print(i)?",
+            "options": [
+              "0 1 2 3 4",
+              "1 2 3 4 5",
+              "5 4 3 2 1",
+              "0 2 4"
+            ],
+            "correct_answer": "0 1 2 3 4"
+          },
+          {
+            "question": "How do you iterate through a list using a for loop?",
+            "options": [
+              "for item in list:",
+              "for (item) in list[]",
+              "for each item in list",
+              "iterate item over list"
+            ],
+            "correct_answer": "for item in list:"
+          },
+          {
+            "question": "What is the difference between for and while loops?",
+            "options": [
+              "for is for infinite loops, while is for fixed iteration",
+              "while is for infinite loops, for is for iteration over a sequence",
+              "for is always faster than while",
+              "There is no difference"
+            ],
+            "correct_answer": "while is for infinite loops, for is for iteration over a sequence"
+          },
+          {
+            "question": "How do you exit a loop before it has finished all iterations?",
+            "options": [
+              "break",
+              "exit",
+              "continue",
+              "stop"
+            ],
+            "correct_answer": "break"
+          },
+          {
+            "question": "How do you write a loop that counts down from 10 to 1?",
+            "options": [
+              "for i in range(10, 0, -1):",
+              "for i = 10 to 1",
+              "while i > 0:",
+              "loop from 10 to 1"
+            ],
+            "correct_answer": "for i in range(10, 0, -1):"
+          },
+          {
+            "question": "What does the continue statement do in a loop?",
+            "options": [
+              "Ends the loop",
+              "Skips the rest of the current iteration",
+              "Repeats the current iteration",
+              "Exits the loop"
+            ],
+            "correct_answer": "Skips the rest of the current iteration"
+          },
+          {
+            "question": "How do you loop through the characters in a string?",
+            "options": [
+              "for char in string:",
+              "loop char through string",
+              "for letter in string()",
+              "for i = 0 to len(string)"
+            ],
+            "correct_answer": "for char in string:"
+          },
+          {
+            "question": "How do you use while to repeat a block of code until a condition is met?",
+            "options": [
+              "while condition:",
+              "until condition is met",
+              "repeat until condition",
+              "while condition = True:"
+            ],
+            "correct_answer": "while condition:"
+          },
+          {
+            "question": "How do you use for with the range() function?",
+            "options": [
+              "for i in range(10):",
+              "loop i from 0 to 10",
+              "for i in [0..10]",
+              "iterate from range(0, 10)"
+            ],
+            "correct_answer": "for i in range(10):"
+          },
+          {
+            "question": "How do you iterate backwards using a for loop?",
+            "options": [
+              "for i in range(10, 0, -1):",
+              "for i = 10 to 1",
+              "while i < 10",
+              "for i in reverse(range(10))"
+            ],
+            "correct_answer": "for i in range(10, 0, -1):"
+          },
+          {
+            "question": "What is the purpose of the else clause in a loop?",
+            "options": [
+              "To execute when the loop condition becomes false",
+              "To end the loop",
+              "To create an infinite loop",
+              "To restart the loop"
+            ],
+            "correct_answer": "To execute when the loop condition becomes false"
+          },
+          {
+            "question": "How do you sum the elements of a list using a loop?",
+            "options": [
+              "for num in list: total += num",
+              "sum(list)",
+              "for sum in list",
+              "list.sum()"
+            ],
+            "correct_answer": "for num in list: total += num"
+          },
+          {
+            "question": "How do you use while to implement a guessing game?",
+            "options": [
+              "while guess != target:",
+              "while True:",
+              "for guess in range(target)",
+              "loop while target"
+            ],
+            "correct_answer": "while guess != target:"
+          },
+          {
+            "question": "What is the syntax for a nested loop?",
+            "options": [
+              "for i in range(5): for j in range(3):",
+              "loop i from 0: loop j from 0",
+              "while (while)",
+              "nested loop"
+            ],
+            "correct_answer": "for i in range(5): for j in range(3):"
+          },
+          {
+            "question": "How do you write a loop that prints only even numbers?",
+            "options": [
+              "for i in range(0, 10, 2):",
+              "while i < 10:",
+              "if i % 2 == 0:",
+              "for i in even(range(10))"
+            ],
+            "correct_answer": "for i in range(0, 10, 2):"
+          }
+        ]
+      }
+    ]
+  }

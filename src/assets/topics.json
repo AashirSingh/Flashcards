@@ -1,0 +1,67 @@
+{
+    "courses": [
+      {
+        "id": 2,
+        "name": "Data Structures & Algorithms",
+        "description": "Learn about various data structures and algorithms.",
+        "topics": [
+          { "title": "Linked Lists" },
+          { "title": "Stacks" },
+          { "title": "Queues" },
+          { "title": "Binary Trees" },
+          { "title": "Merge Sort Algorithm" }
+        ]
+      },
+      {
+        "id": 3,
+        "name": "SQL & Databases",
+        "description": "Master SQL and understand how databases work.",
+        "topics": [
+          { "title": "SQL Basics" },
+          { "title": "Primary Keys and Unique Constraints" },
+          { "title": "Normalization" },
+          { "title": "SQL Joins" },
+          { "title": "Indexes in SQL" }
+        ]
+      },
+      {
+        "id": 4,
+        "name": "Sanskrit",
+        "description": "Learn the basics of Sanskrit letters and pronunciation.",
+        "topics": [
+          { "title": "Devanagari Script" },
+          { "title": "Vowels in Sanskrit" },
+          { "title": "Sandhi Rules" },
+          { "title": "Pronunciation of Consonants" },
+          { "title": "Consonant Clusters" }
+        ]
+      },
+      {
+        "id": 5,
+        "name": "3D Modeling",
+        "description": "Master 3D modeling basics with hands-on projects. Learn to create, texture, and render stunning 3D objects using industry tools.",
+        "topics": [
+          { "title": "Introduction to 3D Modeling" },
+          { "title": "Texturing Techniques" },
+          { "title": "UV Mapping" },
+          { "title": "Vertices, Edges, and Faces" },
+          { "title": "Rigging Basics" }
+        ]
+      },
+      {
+        "id": 6,
+        "name": "Python 1A",
+        "description": "Get started with Python programming for beginners.",
+        "topics": [
+          { "title": "Basic Python Syntax and Data Types" },
+          { "title": "Data Type Conversion and Operators" },
+          { "title": "Input Statements and If Conditions" },
+          { "title": "Useful Python Functions and Math Operations" },
+          { "title": "Loops in Python" },
+          { "title": "Working with Lists" },
+          { "title": "Manipulating Lists" }
+        ]
+      }
+    ]
+  }
+  

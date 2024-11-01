@@ -35,6 +35,10 @@ const routes: Routes = [
   {
     path: 'courses',
     loadChildren: () => import('./shared/courses.module').then(m => m.CoursesModule) // Import practice, study, and quiz here
+  },
+  {
+    path: 'course-topics/:courseId',  // Update this path to include courseId as a parameter
+    loadChildren: () => import('./course-topics/course-topics.module').then(m => m.CourseTopicsPageModule)
   }
 ];
 
