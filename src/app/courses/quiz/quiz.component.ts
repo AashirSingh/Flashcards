@@ -1,11 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { ConfigService } from '../../config.service';
-import { Set } from '../../shared/models/set.model';
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { ModalController } from '@ionic/angular';
 import { QuizResultsComponent } from './quiz-results/quiz-results.component';
-import { HttpClient } from '@angular/common/http';
-import { Question, Topic, QuizData } from '../../shared/models/quiz.model';
+import { Question, Topic, QuizData } from '../../shared/models/quiz.model'; // Import interfaces
 
 @Component({
   selector: 'app-quiz',
@@ -13,62 +10,33 @@ import { Question, Topic, QuizData } from '../../shared/models/quiz.model';
   styleUrls: ['./quiz.component.scss']
 })
 export class QuizComponent implements OnInit {
-  @Input() courseId?: string;
-  questions: Set[] = [];
-  currentQuestionIndex = 0;
-  options: string[] = [];
-  selectedOption: string = '';
-  correctAnswer: string = '';
-  selectionLocked = false;
-  correctAnswersCount = 0;
-  mode: string | null = null; // Property to store mode
-
-  private audio: HTMLAudioElement;
+  questions: Question[] = []; // Array to hold questions
+  currentQuestionIndex = 0; // Index for the current question
+  options: string[] = []; // Options for the current question
+  selectedOption: string = ''; // User-selected option
+  correctAnswer: string = ''; // Correct answer for the current question
+  selectionLocked = false; // Locks selection after user picks an answer
+  correctAnswersCount = 0; // Tracks correct answers
 
   constructor(
-    private configService: ConfigService,
-    private modalCtrl: ModalController,
-    private route: ActivatedRoute,
-    private http: HttpClient
-  ) {
-    this.audio = new Audio();
-  }
+    private http: HttpClient,
+    private modalCtrl: ModalController
+  ) {}
 
   ngOnInit(): void {
-    console.log("QuizComponent initialized");
-    
-    // Retrieve the mode from query parameters
-    this.route.queryParamMap.subscribe(params => {
-      this.mode = params.get('mode');
-      console.log(`Quiz mode: ${this.mode}`);
-    });
-
-    // Retrieve courseId from route parameters if applicable
-    this.route.paramMap.subscribe(params => {
-      this.courseId = params.get('id') || undefined;
-      console.log(`Course ID: ${this.courseId}`);
-      this.loadQuestions();
-    });
-
-    this.loadPythonJsonData();
+    this.loadQuestionsFromJson();
   }
 
-  loadPythonJsonData(): void {
-    console.log("Attempting to load JSON data..."); // Debug log
+  // Load questions from JSON file
+  loadQuestionsFromJson(): void {
     this.http.get<QuizData>('/assets/python1A.json').subscribe(
       (data: QuizData) => {
-        console.log("JSON Data loaded:", data); // Confirm data load
-        if (data.Python1A && Array.isArray(data.Python1A)) {
-          data.Python1A.forEach((topic: Topic, topicIndex: number) => {
-            console.log(`Topic ${topicIndex + 1}: ${topic.topic}`);
-            topic.questions.forEach((question: Question, questionIndex: number) => {
-              console.log(`  Question ${questionIndex + 1}: ${question.question}`);
-              console.log(`  Options: ${question.options.join(', ')}`);
-              console.log(`  Correct Answer: ${question.correct_answer}`);
-            });
-          });
+        // Access the first topic's questions for demonstration purposes
+        if (data.Python1A && data.Python1A.length > 0) {
+          this.questions = data.Python1A[0].questions;
+          this.loadCurrentQuestionOptions();
         } else {
-          console.warn("No 'Python1A' array found in the JSON data.");
+          console.warn("No questions available in JSON data.");
         }
       },
       (error) => {
@@ -77,58 +45,24 @@ export class QuizComponent implements OnInit {
     );
   }
 
-  loadQuestions(): void {
-    if (!this.courseId) {
-      console.error("Course ID is not provided.");
-      return;
-    }
-
-    this.configService.getCourses().subscribe(courses => {
-      const course = courses.find(c => c.id === +this.courseId!);
-      if (course && course.components.practice) {
-        this.questions = course.components.practice.questions as Set[];
-        this.loadOptions();
-      } else {
-        console.error("No data found for course:", this.courseId);
-        this.questions = [];
-      }
-    });
-  }
-
-  loadOptions(): void {
-    if (this.questions.length > 0) {
-      this.correctAnswer = this.questions[this.currentQuestionIndex].answer;
-      this.options = this.generateOptions(this.correctAnswer);
-      this.selectionLocked = false;
+  // Load options for the current question
+  loadCurrentQuestionOptions(): void {
+    if (this.questions.length > 0 && this.questions[this.currentQuestionIndex]) {
+      const currentQuestion = this.questions[this.currentQuestionIndex];
+      this.correctAnswer = currentQuestion.correct_answer;
+      this.options = [...currentQuestion.options];
+      this.selectedOption = ''; // Reset selected option for new question
+      this.selectionLocked = false; // Allow selection for new question
     }
   }
 
-  generateOptions(correctAnswer: string): string[] {
-    const allAnswers = this.questions.map(q => q.answer);
-    const incorrectAnswers = allAnswers.filter(a => a !== correctAnswer);
-    const selectedIncorrect = incorrectAnswers.slice(0, 3);
-    return this.shuffleArray([correctAnswer, ...selectedIncorrect]);
-  }
-
-  shuffleArray(array: string[]): string[] {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-  }
-
-  selectOption(event: any): void {
-    this.selectedOption = event.detail.value;
+  // Handle the selection of an answer
+  selectOption(option: string): void {
+    this.selectedOption = option;
     this.selectionLocked = true;
-
-    if (this.isCorrect()) {
-      this.playSound('/assets/sounds/correct-answer.mp3');
-    } else {
-      this.playSound('/assets/sounds/wrong-answer.mp3');
-    }
   }
 
+  // Move to the next question or show results if at the end
   nextQuestion(): void {
     if (this.selectedOption === this.correctAnswer) {
       this.correctAnswersCount++;
@@ -136,18 +70,13 @@ export class QuizComponent implements OnInit {
 
     if (this.currentQuestionIndex < this.questions.length - 1) {
       this.currentQuestionIndex++;
-      this.selectedOption = '';
-      this.loadOptions();
-      this.playSound('/assets/sounds/next-question.mp3');
+      this.loadCurrentQuestionOptions();
     } else {
       this.showResults();
     }
   }
 
-  isCorrect(): boolean {
-    return this.selectedOption === this.correctAnswer;
-  }
-
+  // Show results in a modal at the end of the quiz
   async showResults(): Promise<void> {
     const modal = await this.modalCtrl.create({
       component: QuizResultsComponent,
@@ -157,11 +86,5 @@ export class QuizComponent implements OnInit {
       }
     });
     await modal.present();
-  }
-
-  playSound(fileUrl: string): void {
-    this.audio.src = fileUrl;
-    this.audio.load();
-    this.audio.play();
   }
 }

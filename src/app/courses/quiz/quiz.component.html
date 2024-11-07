@@ -5,35 +5,34 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-card *ngIf="questions.length > 0">
+  <!-- Display question if available -->
+  <ion-card *ngIf="questions.length > 0; else noQuestions">
     <ion-card-header>
       <ion-card-title class="ion-text-center">{{ questions[currentQuestionIndex].question }}</ion-card-title>
     </ion-card-header>
 
     <!-- Display the multiple-choice options -->
     <ion-list>
-      <!-- Only allow one selection inside ion-radio-group -->
-      <ion-radio-group [(ngModel)]="selectedOption" (ionChange)="selectOption($event)">
+      <ion-radio-group [(ngModel)]="selectedOption">
         <ion-item *ngFor="let option of options">
           <ion-label>{{ option }}</ion-label>
-          <ion-radio slot="start" [value]="option" [disabled]="selectionLocked"></ion-radio>
+          <ion-radio slot="start" [value]="option" (ionSelect)="selectOption(option)"></ion-radio>
         </ion-item>
       </ion-radio-group>
     </ion-list>
 
     <!-- Button to proceed to the next question -->
-    <ion-button expand="block" color="primary" [disabled]="!selectedOption" (click)="nextQuestion()">Next</ion-button>
-
-    <!-- Display whether the selected option is correct or incorrect -->
-    <ion-label class="ion-text-center" *ngIf="selectionLocked">
-      {{ isCorrect() ? 'Correct!' : 'Incorrect, the correct answer is: ' + correctAnswer }}
-    </ion-label>
+    <ion-button expand="block" color="primary" [disabled]="!selectedOption" (click)="nextQuestion()">
+      Next
+    </ion-button>
   </ion-card>
 
-  <!-- Display a message if no questions are available -->
-  <ion-card *ngIf="questions.length === 0">
-    <ion-card-header>
-      <ion-card-title>No questions available for this course.</ion-card-title>
-    </ion-card-header>
-  </ion-card>
+  <!-- Fallback if no questions are available -->
+  <ng-template #noQuestions>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>No questions available for this course.</ion-card-title>
+      </ion-card-header>
+    </ion-card>
+  </ng-template>
 </ion-content>
