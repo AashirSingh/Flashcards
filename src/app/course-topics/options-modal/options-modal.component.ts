@@ -18,9 +18,15 @@ export class OptionsModalComponent {
   selectOption(mode: string) {
     console.log(`Selected option: ${mode}`);
     
-    // Navigate to QuizComponent with mode as a query parameter and course ID as a path parameter
-    this.router.navigate(['/courses/quiz/1'], { queryParams: { mode } }); // Replace `1` with dynamic course ID if needed
-    
+    // Navigate to the appropriate component based on the mode
+    if (mode === 'quiz') {
+      this.router.navigate(['/courses/quiz/1'], { queryParams: { mode } }); // Replace `1` with dynamic course ID if needed
+    } else if (mode === 'study') {
+      this.router.navigate(['/courses/study/1'], { queryParams: { mode } }); // Replace `1` with dynamic course ID if needed
+    } else if (mode === 'practice') {
+      this.router.navigate(['/courses/practice/1'], { queryParams: { mode } }); // Replace `1` with dynamic course ID if needed
+    }
+
     this.closeModal();
   }
 }

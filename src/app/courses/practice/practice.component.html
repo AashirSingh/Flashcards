@@ -11,24 +11,27 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <!-- Read Mode Content -->
+  <!-- Flashcard Content -->
   <ion-card *ngIf="questions.length > 0" (click)="toggleAnswer()" class="card-flip">
     <div class="flip-container">
       <div [class.flip]="showAnswer" class="flip">
+        <!-- Front side of the card: Question -->
         <div class="card-front">
           <ion-card-header>
             <ion-card-title class="ion-text-center">{{ questions[currentQuestionIndex].question }}</ion-card-title>
           </ion-card-header>
         </div>
+        <!-- Back side of the card: Answer -->
         <div class="card-back">
           <ion-card-header>
-            <ion-card-title class="ion-text-center">{{ questions[currentQuestionIndex].answer }}</ion-card-title>
+            <ion-card-title class="ion-text-center">{{ questions[currentQuestionIndex].correct_answer }}</ion-card-title>
           </ion-card-header>
         </div>
       </div>
     </div>
   </ion-card>
 
+  <!-- Navigation Buttons for Flashcards -->
   <ion-row *ngIf="questions.length > 0">
     <ion-col size="6">
       <ion-button expand="block" color="medium" [disabled]="currentQuestionIndex === 0" (click)="previousQuestion()">
@@ -44,6 +47,7 @@
     </ion-col>
   </ion-row>
 
+  <!-- Fallback if no questions are available -->
   <ion-card *ngIf="questions.length === 0">
     <ion-card-header>
       <ion-card-title>No questions available for this course.</ion-card-title>

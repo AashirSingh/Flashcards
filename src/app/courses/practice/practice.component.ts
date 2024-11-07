@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ConfigService } from '../../config.service';
-import { Set } from '../../shared/models/set.model';
+import { HttpClient } from '@angular/common/http';
 import { ModalController } from '@ionic/angular';
 import { WriteModalComponent } from '../../dashboard/flashcard/write-modal/write-modal.component';
 import { Howl } from 'howler';
+import { Question, QuizData } from '../../shared/models/quiz.model';
 
 @Component({
   selector: 'app-practice',
@@ -13,7 +13,7 @@ import { Howl } from 'howler';
 })
 export class PracticeComponent implements OnInit {
   @Input() courseId?: string;
-  questions: Set[] = [];
+  questions: Question[] = [];
   currentQuestionIndex = 0;
   showAnswer = false;
   isReadMode = true;
@@ -21,51 +21,39 @@ export class PracticeComponent implements OnInit {
   sound!: Howl;
 
   constructor(
-    private configService: ConfigService,
     private modalController: ModalController,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private http: HttpClient
   ) {}
 
   ngOnInit(): void {
-    // First, check if `courseId` is provided through route parameter.
-    if (!this.courseId) {
-      this.route.paramMap.subscribe(params => {
-        const idFromRoute = params.get('id');
-        if (idFromRoute) {
-          this.courseId = idFromRoute;
-        }
-        this.loadCourseData();
-      });
-    } else {
-      // If courseId is passed as an @Input(), load the course data.
-      this.loadCourseData();
-    }
-    console.log(this.courseId);
+    this.loadPracticeQuestionsFromJson();
   }
 
-  loadCourseData(): void {
-    if (!this.courseId) {
-      console.error("Course ID is not provided.");
-      return;
-    }
-
-    this.configService.getCourses().subscribe(courses => {
-      const course = courses.find(c => c.id === +this.courseId!);
-      console.log(course);
-      if (course && course.components.practice) {
-        this.questions = course.components.practice.questions as Set[];
-        console.log("Questions loaded:", this.questions);
-
-        // Check if the current course is Sanskrit
-        if (course.name.toLowerCase() === 'sanskrit') {
-          this.isSanskritCourse = true;
-          this.loadSound(); // Load sound for Sanskrit course
+  loadPracticeQuestionsFromJson(): void {
+    this.http.get<QuizData>('/assets/python1A.json').subscribe(
+      (data: QuizData) => {
+        // Access the first topic's questions for demonstration purposes
+        if (data.Python1A && data.Python1A.length > 0) {
+          this.questions = data.Python1A[0].questions;
+          console.log("Practice questions loaded:", this.questions);
+          this.checkIfSanskritCourse(); // Check if the current course is Sanskrit
+        } else {
+          console.warn("No practice questions available in JSON data.");
         }
-      } else {
-        console.error("No data found for course:", this.courseId);
-        this.questions = [];
+      },
+      (error) => {
+        console.error("Error loading JSON file:", error);
       }
-    });
+    );
+  }
+
+  checkIfSanskritCourse(): void {
+    // Assuming that you can add some logic here to determine if the course is Sanskrit
+    if (this.courseId === 'sanskrit') { // Replace with proper identification logic
+      this.isSanskritCourse = true;
+      this.loadSound(); // Load sound for Sanskrit course
+    }
   }
 
   loadSound() {
