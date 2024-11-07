@@ -4,6 +4,8 @@ import { ConfigService } from '../../config.service';
 import { Set } from '../../shared/models/set.model';
 import { ModalController } from '@ionic/angular';
 import { QuizResultsComponent } from './quiz-results/quiz-results.component';
+import { HttpClient } from '@angular/common/http';
+import { Question, Topic, QuizData } from '../../shared/models/quiz.model';
 
 @Component({
   selector: 'app-quiz',
@@ -12,39 +14,69 @@ import { QuizResultsComponent } from './quiz-results/quiz-results.component';
 })
 export class QuizComponent implements OnInit {
   @Input() courseId?: string;
-  questions: Set[] = []; // Array to hold the questions for the quiz
-  currentQuestionIndex = 0; // Keeps track of the current question
-  options: string[] = []; // Array to hold the multiple-choice options
-  selectedOption: string = ''; // The user's selected answer
-  correctAnswer: string = ''; // Holds the correct answer for the current question
-  selectionLocked = false; // Locks the selection after the user picks an answer
-  correctAnswersCount = 0; // Tracks the number of correct answers
+  questions: Set[] = [];
+  currentQuestionIndex = 0;
+  options: string[] = [];
+  selectedOption: string = '';
+  correctAnswer: string = '';
+  selectionLocked = false;
+  correctAnswersCount = 0;
+  mode: string | null = null; // Property to store mode
 
   private audio: HTMLAudioElement;
 
   constructor(
     private configService: ConfigService,
     private modalCtrl: ModalController,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private http: HttpClient
   ) {
     this.audio = new Audio();
   }
 
   ngOnInit(): void {
-    if (!this.courseId) {
-      this.route.paramMap.subscribe(params => {
-        const idFromRoute = params.get('id');
-        if (idFromRoute) {
-          this.courseId = idFromRoute;
-        }
-        this.loadQuestions();
-      });
-    } else {
+    console.log("QuizComponent initialized");
+    
+    // Retrieve the mode from query parameters
+    this.route.queryParamMap.subscribe(params => {
+      this.mode = params.get('mode');
+      console.log(`Quiz mode: ${this.mode}`);
+    });
+
+    // Retrieve courseId from route parameters if applicable
+    this.route.paramMap.subscribe(params => {
+      this.courseId = params.get('id') || undefined;
+      console.log(`Course ID: ${this.courseId}`);
       this.loadQuestions();
-    }
+    });
+
+    this.loadPythonJsonData();
   }
 
-  // Load questions from the ConfigService
+  loadPythonJsonData(): void {
+    console.log("Attempting to load JSON data..."); // Debug log
+    this.http.get<QuizData>('/assets/python1A.json').subscribe(
+      (data: QuizData) => {
+        console.log("JSON Data loaded:", data); // Confirm data load
+        if (data.Python1A && Array.isArray(data.Python1A)) {
+          data.Python1A.forEach((topic: Topic, topicIndex: number) => {
+            console.log(`Topic ${topicIndex + 1}: ${topic.topic}`);
+            topic.questions.forEach((question: Question, questionIndex: number) => {
+              console.log(`  Question ${questionIndex + 1}: ${question.question}`);
+              console.log(`  Options: ${question.options.join(', ')}`);
+              console.log(`  Correct Answer: ${question.correct_answer}`);
+            });
+          });
+        } else {
+          console.warn("No 'Python1A' array found in the JSON data.");
+        }
+      },
+      (error) => {
+        console.error("Error loading JSON file:", error);
+      }
+    );
+  }
+
   loadQuestions(): void {
     if (!this.courseId) {
       console.error("Course ID is not provided.");
@@ -63,28 +95,21 @@ export class QuizComponent implements OnInit {
     });
   }
 
-  // Load the multiple-choice options for the current question
   loadOptions(): void {
     if (this.questions.length > 0) {
-      this.correctAnswer = this.questions[this.currentQuestionIndex].answer; // Store the correct answer
+      this.correctAnswer = this.questions[this.currentQuestionIndex].answer;
       this.options = this.generateOptions(this.correctAnswer);
-      this.selectionLocked = false; // Allow selection when loading a new question
+      this.selectionLocked = false;
     }
   }
 
-  // Generate the options, including the correct answer and some incorrect answers
   generateOptions(correctAnswer: string): string[] {
     const allAnswers = this.questions.map(q => q.answer);
     const incorrectAnswers = allAnswers.filter(a => a !== correctAnswer);
-
-    // Select up to 3 incorrect answers
     const selectedIncorrect = incorrectAnswers.slice(0, 3);
-
-    // Shuffle the correct answer with the selected incorrect answers
     return this.shuffleArray([correctAnswer, ...selectedIncorrect]);
   }
 
-  // Shuffle the options for randomness
   shuffleArray(array: string[]): string[] {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -93,40 +118,36 @@ export class QuizComponent implements OnInit {
     return array;
   }
 
-  // Handle option selection by the user
   selectOption(event: any): void {
     this.selectedOption = event.detail.value;
-    this.selectionLocked = true; // Lock selection after an option is selected
+    this.selectionLocked = true;
 
     if (this.isCorrect()) {
-      this.playSound('/assets/sounds/correct-answer.mp3'); // Play correct answer sound
+      this.playSound('/assets/sounds/correct-answer.mp3');
     } else {
-      this.playSound('/assets/sounds/wrong-answer.mp3'); // Play wrong answer sound
+      this.playSound('/assets/sounds/wrong-answer.mp3');
     }
   }
 
-  // Proceed to the next question or show results if the quiz is completed
   nextQuestion(): void {
     if (this.selectedOption === this.correctAnswer) {
-      this.correctAnswersCount++; // Increment correct answers count if the user answered correctly
+      this.correctAnswersCount++;
     }
 
     if (this.currentQuestionIndex < this.questions.length - 1) {
       this.currentQuestionIndex++;
-      this.selectedOption = ''; // Reset selected option
-      this.loadOptions(); // Load new options for the next question
-      this.playSound('/assets/sounds/next-question.mp3'); // Play sound for next question
+      this.selectedOption = '';
+      this.loadOptions();
+      this.playSound('/assets/sounds/next-question.mp3');
     } else {
-      this.showResults(); // Show results when the quiz ends
+      this.showResults();
     }
   }
 
-  // Check if the selected option is correct
   isCorrect(): boolean {
     return this.selectedOption === this.correctAnswer;
   }
 
-  // Display the results modal
   async showResults(): Promise<void> {
     const modal = await this.modalCtrl.create({
       component: QuizResultsComponent,
@@ -138,7 +159,6 @@ export class QuizComponent implements OnInit {
     await modal.present();
   }
 
-  // Method to play sound based on the provided file path
   playSound(fileUrl: string): void {
     this.audio.src = fileUrl;
     this.audio.load();
