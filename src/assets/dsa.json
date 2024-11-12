@@ -1,0 +1,826 @@
+{
+    "DSA": [
+      {
+        "topic": "Linked Lists",
+        "questions": [
+          {
+            "question": "What is a linked list?",
+            "options": [
+              "A data structure consisting of nodes that are connected sequentially",
+              "A collection of elements stored at contiguous memory locations",
+              "A method of sorting data in ascending order",
+              "A fixed-size array in memory"
+            ],
+            "correct_answer": "A data structure consisting of nodes that are connected sequentially"
+          },
+          {
+            "question": "What is a node in a linked list?",
+            "options": [
+              "A single unit of data in a linked list that contains data and a reference to the next node",
+              "A pointer to the start of the linked list",
+              "The last element in the linked list",
+              "An array element"
+            ],
+            "correct_answer": "A single unit of data in a linked list that contains data and a reference to the next node"
+          },
+          {
+            "question": "What is the difference between singly linked lists and doubly linked lists?",
+            "options": [
+              "Singly linked lists have one pointer per node, while doubly linked lists have two",
+              "Singly linked lists allow traversal in both directions, doubly linked lists do not",
+              "Doubly linked lists store elements contiguously in memory, singly linked lists do not",
+              "There is no difference between the two"
+            ],
+            "correct_answer": "Singly linked lists have one pointer per node, while doubly linked lists have two"
+          },
+          {
+            "question": "What is the time complexity to insert an element at the head of a singly linked list?",
+            "options": [
+              "O(1)",
+              "O(n)",
+              "O(log n)",
+              "O(n^2)"
+            ],
+            "correct_answer": "O(1)"
+          },
+          {
+            "question": "Which operation is not possible in a singly linked list?",
+            "options": [
+              "Traversal in reverse order",
+              "Insertion at the head",
+              "Insertion at the tail",
+              "Searching for an element"
+            ],
+            "correct_answer": "Traversal in reverse order"
+          },
+          {
+            "question": "What is the advantage of a doubly linked list over a singly linked list?",
+            "options": [
+              "Easier traversal in both directions",
+              "Less memory usage",
+              "Simpler implementation",
+              "Faster insertion at the tail"
+            ],
+            "correct_answer": "Easier traversal in both directions"
+          },
+          {
+            "question": "Which of the following is true about circular linked lists?",
+            "options": [
+              "The last node points back to the first node",
+              "The first node points to the last node",
+              "They are a type of array",
+              "They do not use pointers"
+            ],
+            "correct_answer": "The last node points back to the first node"
+          },
+          {
+            "question": "What is the time complexity to delete a node in a doubly linked list?",
+            "options": [
+              "O(1)",
+              "O(n)",
+              "O(log n)",
+              "O(n^2)"
+            ],
+            "correct_answer": "O(1)"
+          },
+          {
+            "question": "Which of the following operations is inefficient for a linked list compared to an array?",
+            "options": [
+              "Accessing an element by index",
+              "Insertion at the head",
+              "Insertion at the tail",
+              "Traversal"
+            ],
+            "correct_answer": "Accessing an element by index"
+          },
+          {
+            "question": "How can a linked list be made circular?",
+            "options": [
+              "By making the next pointer of the last node point to the first node",
+              "By adding a pointer to every node",
+              "By removing the head node",
+              "By adding an extra tail node"
+            ],
+            "correct_answer": "By making the next pointer of the last node point to the first node"
+          },
+          {
+            "question": "What is the main disadvantage of using linked lists?",
+            "options": [
+              "Memory overhead due to pointers",
+              "Fixed size",
+              "Contiguous memory requirement",
+              "Inefficient traversal"
+            ],
+            "correct_answer": "Memory overhead due to pointers"
+          },
+          {
+            "question": "What is the tail pointer in a linked list?",
+            "options": [
+              "A pointer to the last node in the list",
+              "A pointer to the first node in the list",
+              "A pointer to the second node in the list",
+              "A pointer to a middle node in the list"
+            ],
+            "correct_answer": "A pointer to the last node in the list"
+          },
+          {
+            "question": "Which operation in a linked list is more efficient than in an array?",
+            "options": [
+              "Insertion at the beginning",
+              "Access by index",
+              "Traversal",
+              "Access by value"
+            ],
+            "correct_answer": "Insertion at the beginning"
+          },
+          {
+            "question": "What happens when the last node of a singly linked list is deleted?",
+            "options": [
+              "The previous node's next pointer is set to null",
+              "The linked list becomes circular",
+              "All nodes are deleted",
+              "The head pointer is updated"
+            ],
+            "correct_answer": "The previous node's next pointer is set to null"
+          },
+          {
+            "question": "What is the time complexity for searching an element in a singly linked list?",
+            "options": [
+              "O(n)",
+              "O(1)",
+              "O(log n)",
+              "O(n^2)"
+            ],
+            "correct_answer": "O(n)"
+          },
+          {
+            "question": "How can a doubly linked list be converted into a singly linked list?",
+            "options": [
+              "By removing the backward pointer",
+              "By removing the forward pointer",
+              "By adding extra memory",
+              "By reversing the nodes"
+            ],
+            "correct_answer": "By removing the backward pointer"
+          },
+          {
+            "question": "What does the 'head' pointer of a linked list store?",
+            "options": [
+              "The address of the first node",
+              "The data of the first node",
+              "The size of the linked list",
+              "The address of the last node"
+            ],
+            "correct_answer": "The address of the first node"
+          },
+          {
+            "question": "In a linked list, how do you find the middle element efficiently?",
+            "options": [
+              "Using two pointers, one moving twice as fast as the other",
+              "By traversing the entire list twice",
+              "By storing the index of each node",
+              "By using an array"
+            ],
+            "correct_answer": "Using two pointers, one moving twice as fast as the other"
+          },
+          {
+            "question": "What does a null pointer indicate in a linked list?",
+            "options": [
+              "The end of the list",
+              "A corrupted node",
+              "The list is circular",
+              "The list is empty"
+            ],
+            "correct_answer": "The end of the list"
+          },
+          {
+            "question": "What is a sentinel node in a linked list?",
+            "options": [
+              "A special node used to simplify boundary conditions",
+              "The first node in the list",
+              "The last node in the list",
+              "The middle node in the list"
+            ],
+            "correct_answer": "A special node used to simplify boundary conditions"
+          }
+        ]
+      },
+      {
+        "topic": "Queues",
+        "questions": [
+          {
+            "question": "What is a queue?",
+            "options": [
+              "A data structure that follows the First In, First Out (FIFO) principle",
+              "A data structure that follows the Last In, First Out (LIFO) principle",
+              "A hierarchical data structure",
+              "A type of tree structure"
+            ],
+            "correct_answer": "A data structure that follows the First In, First Out (FIFO) principle"
+          },
+          {
+            "question": "Which operation adds an element to the rear of the queue?",
+            "options": [
+              "Enqueue",
+              "Dequeue",
+              "Peek",
+              "Insert"
+            ],
+            "correct_answer": "Enqueue"
+          },
+          {
+            "question": "What is the time complexity of enqueue and dequeue operations in a queue implemented using an array?",
+            "options": [
+              "O(1)",
+              "O(n)",
+              "O(log n)",
+              "O(n^2)"
+            ],
+            "correct_answer": "O(1)"
+          },
+          {
+            "question": "Which operation removes an element from the front of the queue?",
+            "options": [
+              "Dequeue",
+              "Enqueue",
+              "Peek",
+              "Delete"
+            ],
+            "correct_answer": "Dequeue"
+          },
+          {
+            "question": "What is the main difference between a queue and a stack?",
+            "options": [
+              "Queue follows FIFO, stack follows LIFO",
+              "Queue follows LIFO, stack follows FIFO",
+              "Both follow FIFO",
+              "Both follow LIFO"
+            ],
+            "correct_answer": "Queue follows FIFO, stack follows LIFO"
+          },
+          {
+            "question": "What is a circular queue?",
+            "options": [
+              "A queue where the last position is connected to the first",
+              "A queue with elements arranged in a tree structure",
+              "A queue with elements stored in sorted order",
+              "A queue with only one element"
+            ],
+            "correct_answer": "A queue where the last position is connected to the first"
+          },
+          {
+            "question": "What is the main advantage of a circular queue over a normal queue?",
+            "options": [
+              "Efficient use of memory",
+              "Faster access time",
+              "Simpler implementation",
+              "Easier sorting of elements"
+            ],
+            "correct_answer": "Efficient use of memory"
+          },
+          {
+            "question": "What happens when you try to dequeue an element from an empty queue?",
+            "options": [
+              "An underflow error occurs",
+              "The queue resets to its initial state",
+              "The last element is returned",
+              "A new element is added"
+            ],
+            "correct_answer": "An underflow error occurs"
+          },
+          {
+            "question": "What is the role of the 'rear' pointer in a queue?",
+            "options": [
+              "Points to the last element in the queue",
+              "Points to the first element in the queue",
+              "Points to the middle of the queue",
+              "Points to the second element in the queue"
+            ],
+            "correct_answer": "Points to the last element in the queue"
+          },
+          {
+            "question": "What type of queue is used in a printer's job scheduling?",
+            "options": [
+              "Priority queue",
+              "Circular queue",
+              "Double-ended queue",
+              "Simple queue"
+            ],
+            "correct_answer": "Priority queue"
+          },
+          {
+            "question": "What is a double-ended queue (deque)?",
+            "options": [
+              "A queue where elements can be added or removed from both ends",
+              "A queue where elements can be added at the rear and removed from the front",
+              "A queue where elements are stored in pairs",
+              "A queue where each element is linked to the next element"
+            ],
+            "correct_answer": "A queue where elements can be added or removed from both ends"
+          },
+          {
+            "question": "Which data structure is used for Breadth First Search (BFS)?",
+            "options": [
+              "Queue",
+              "Stack",
+              "Array",
+              "Binary Tree"
+            ],
+            "correct_answer": "Queue"
+          },
+          {
+            "question": "Which of the following is an application of a queue?",
+            "options": [
+              "Task scheduling",
+              "Expression evaluation",
+              "Backtracking",
+              "Binary search"
+            ],
+            "correct_answer": "Task scheduling"
+          },
+          {
+            "question": "How is a queue implemented using a linked list?",
+            "options": [
+              "By keeping pointers to the front and rear of the list",
+              "By using a single pointer to the head of the list",
+              "By maintaining a circular structure in the list",
+              "By storing elements in sorted order"
+            ],
+            "correct_answer": "By keeping pointers to the front and rear of the list"
+          },
+          {
+            "question": "What is the state of a queue called when it has reached its maximum capacity?",
+            "options": [
+              "Overflow",
+              "Underflow",
+              "Full",
+              "Blocked"
+            ],
+            "correct_answer": "Overflow"
+          },
+          {
+            "question": "Which of the following is true about a queue?",
+            "options": [
+              "Elements are added at the rear and removed from the front",
+              "Elements are added and removed from the rear",
+              "Elements are added at the front and removed from the rear",
+              "Elements are removed in random order"
+            ],
+            "correct_answer": "Elements are added at the rear and removed from the front"
+          },
+          {
+            "question": "What is a priority queue?",
+            "options": [
+              "A queue where each element is assigned a priority",
+              "A queue where elements are arranged in a circular manner",
+              "A queue where elements can be accessed by index",
+              "A queue with only one element"
+            ],
+            "correct_answer": "A queue where each element is assigned a priority"
+          },
+          {
+            "question": "How can you check if a queue is empty?",
+            "options": [
+              "By checking if the front pointer is null",
+              "By checking if the rear pointer is null",
+              "By checking if both front and rear pointers are null",
+              "By checking if the size of the queue is less than one"
+            ],
+            "correct_answer": "By checking if both front and rear pointers are null"
+          },
+          {
+            "question": "What is the purpose of a queue in operating systems?",
+            "options": [
+              "Managing processes in the CPU scheduler",
+              "Sorting files in directories",
+              "Performing depth-first traversal",
+              "Maintaining a stack of open files"
+            ],
+            "correct_answer": "Managing processes in the CPU scheduler"
+          },
+          {
+            "question": "Which of the following queue types allows insertion at the rear and deletion from the front?",
+            "options": [
+              "Simple queue",
+              "Priority queue",
+              "Double-ended queue",
+              "Circular queue"
+            ],
+            "correct_answer": "Simple queue"
+          }
+        ]
+      },
+      {
+        "topic": "Queues",
+        "questions": [
+          {
+            "question": "What is a queue?",
+            "options": [
+              "A data structure that follows the First In, First Out (FIFO) principle",
+              "A data structure that follows the Last In, First Out (LIFO) principle",
+              "A hierarchical data structure",
+              "A type of tree structure"
+            ],
+            "correct_answer": "A data structure that follows the First In, First Out (FIFO) principle"
+          },
+          {
+            "question": "Which operation adds an element to the rear of the queue?",
+            "options": [
+              "Enqueue",
+              "Dequeue",
+              "Peek",
+              "Insert"
+            ],
+            "correct_answer": "Enqueue"
+          },
+          {
+            "question": "What is the time complexity of enqueue and dequeue operations in a queue implemented using an array?",
+            "options": [
+              "O(1)",
+              "O(n)",
+              "O(log n)",
+              "O(n^2)"
+            ],
+            "correct_answer": "O(1)"
+          },
+          {
+            "question": "Which operation removes an element from the front of the queue?",
+            "options": [
+              "Dequeue",
+              "Enqueue",
+              "Peek",
+              "Delete"
+            ],
+            "correct_answer": "Dequeue"
+          },
+          {
+            "question": "What is the main difference between a queue and a stack?",
+            "options": [
+              "Queue follows FIFO, stack follows LIFO",
+              "Queue follows LIFO, stack follows FIFO",
+              "Both follow FIFO",
+              "Both follow LIFO"
+            ],
+            "correct_answer": "Queue follows FIFO, stack follows LIFO"
+          },
+          {
+            "question": "What is a circular queue?",
+            "options": [
+              "A queue where the last position is connected to the first",
+              "A queue with elements arranged in a tree structure",
+              "A queue with elements stored in sorted order",
+              "A queue with only one element"
+            ],
+            "correct_answer": "A queue where the last position is connected to the first"
+          },
+          {
+            "question": "What is the main advantage of a circular queue over a normal queue?",
+            "options": [
+              "Efficient use of memory",
+              "Faster access time",
+              "Simpler implementation",
+              "Easier sorting of elements"
+            ],
+            "correct_answer": "Efficient use of memory"
+          },
+          {
+            "question": "What happens when you try to dequeue an element from an empty queue?",
+            "options": [
+              "An underflow error occurs",
+              "The queue resets to its initial state",
+              "The last element is returned",
+              "A new element is added"
+            ],
+            "correct_answer": "An underflow error occurs"
+          },
+          {
+            "question": "What is the role of the 'rear' pointer in a queue?",
+            "options": [
+              "Points to the last element in the queue",
+              "Points to the first element in the queue",
+              "Points to the middle of the queue",
+              "Points to the second element in the queue"
+            ],
+            "correct_answer": "Points to the last element in the queue"
+          },
+          {
+            "question": "What type of queue is used in a printer's job scheduling?",
+            "options": [
+              "Priority queue",
+              "Circular queue",
+              "Double-ended queue",
+              "Simple queue"
+            ],
+            "correct_answer": "Priority queue"
+          },
+          {
+            "question": "What is a double-ended queue (deque)?",
+            "options": [
+              "A queue where elements can be added or removed from both ends",
+              "A queue where elements can be added at the rear and removed from the front",
+              "A queue where elements are stored in pairs",
+              "A queue where each element is linked to the next element"
+            ],
+            "correct_answer": "A queue where elements can be added or removed from both ends"
+          },
+          {
+            "question": "Which data structure is used for Breadth First Search (BFS)?",
+            "options": [
+              "Queue",
+              "Stack",
+              "Array",
+              "Binary Tree"
+            ],
+            "correct_answer": "Queue"
+          },
+          {
+            "question": "Which of the following is an application of a queue?",
+            "options": [
+              "Task scheduling",
+              "Expression evaluation",
+              "Backtracking",
+              "Binary search"
+            ],
+            "correct_answer": "Task scheduling"
+          },
+          {
+            "question": "How is a queue implemented using a linked list?",
+            "options": [
+              "By keeping pointers to the front and rear of the list",
+              "By using a single pointer to the head of the list",
+              "By maintaining a circular structure in the list",
+              "By storing elements in sorted order"
+            ],
+            "correct_answer": "By keeping pointers to the front and rear of the list"
+          },
+          {
+            "question": "What is the state of a queue called when it has reached its maximum capacity?",
+            "options": [
+              "Overflow",
+              "Underflow",
+              "Full",
+              "Blocked"
+            ],
+            "correct_answer": "Overflow"
+          },
+          {
+            "question": "Which of the following is true about a queue?",
+            "options": [
+              "Elements are added at the rear and removed from the front",
+              "Elements are added and removed from the rear",
+              "Elements are added at the front and removed from the rear",
+              "Elements are removed in random order"
+            ],
+            "correct_answer": "Elements are added at the rear and removed from the front"
+          },
+          {
+            "question": "What is a priority queue?",
+            "options": [
+              "A queue where each element is assigned a priority",
+              "A queue where elements are arranged in a circular manner",
+              "A queue where elements can be accessed by index",
+              "A queue with only one element"
+            ],
+            "correct_answer": "A queue where each element is assigned a priority"
+          },
+          {
+            "question": "How can you check if a queue is empty?",
+            "options": [
+              "By checking if the front pointer is null",
+              "By checking if the rear pointer is null",
+              "By checking if both front and rear pointers are null",
+              "By checking if the size of the queue is less than one"
+            ],
+            "correct_answer": "By checking if both front and rear pointers are null"
+          },
+          {
+            "question": "What is the purpose of a queue in operating systems?",
+            "options": [
+              "Managing processes in the CPU scheduler",
+              "Sorting files in directories",
+              "Performing depth-first traversal",
+              "Maintaining a stack of open files"
+            ],
+            "correct_answer": "Managing processes in the CPU scheduler"
+          },
+          {
+            "question": "Which of the following queue types allows insertion at the rear and deletion from the front?",
+            "options": [
+              "Simple queue",
+              "Priority queue",
+              "Double-ended queue",
+              "Circular queue"
+            ],
+            "correct_answer": "Simple queue"
+          }
+        ]
+      },
+      {
+        "topic": "Binary Trees",
+        "questions": [
+          {
+            "question": "What is a binary tree?",
+            "options": [
+              "A tree data structure where each node has at most two children",
+              "A tree with all nodes having exactly two children",
+              "A tree where all nodes are binary numbers",
+              "A tree where nodes are stored in pairs"
+            ],
+            "correct_answer": "A tree data structure where each node has at most two children"
+          },
+          {
+            "question": "What is the maximum number of nodes in a binary tree of height h?",
+            "options": [
+              "2^(h+1) - 1",
+              "h + 1",
+              "h * 2",
+              "2^h - 1"
+            ],
+            "correct_answer": "2^(h+1) - 1"
+          },
+          {
+            "question": "What is an in-order traversal of a binary tree?",
+            "options": [
+              "Traverse left subtree, visit root, traverse right subtree",
+              "Visit root, traverse left subtree, traverse right subtree",
+              "Traverse left subtree, traverse right subtree, visit root",
+              "Traverse right subtree, visit root, traverse left subtree"
+            ],
+            "correct_answer": "Traverse left subtree, visit root, traverse right subtree"
+          },
+          {
+            "question": "What is the height of a binary tree?",
+            "options": [
+              "The length of the longest path from the root to a leaf",
+              "The number of nodes in the tree",
+              "The total number of edges in the tree",
+              "The number of levels in the tree"
+            ],
+            "correct_answer": "The length of the longest path from the root to a leaf"
+          },
+          {
+            "question": "What is a balanced binary tree?",
+            "options": [
+              "A tree where the height difference between the left and right subtrees of any node is at most 1",
+              "A tree where all levels are fully filled",
+              "A tree with all nodes having two children",
+              "A tree where each node has the same value"
+            ],
+            "correct_answer": "A tree where the height difference between the left and right subtrees of any node is at most 1"
+          },
+          {
+            "question": "What is a full binary tree?",
+            "options": [
+              "A tree where every node has either 0 or 2 children",
+              "A tree where every node has exactly 2 children",
+              "A tree where all leaves are at the same level",
+              "A tree with the maximum possible number of nodes"
+            ],
+            "correct_answer": "A tree where every node has either 0 or 2 children"
+          },
+          {
+            "question": "Which traversal method visits the root before its subtrees?",
+            "options": [
+              "Pre-order traversal",
+              "In-order traversal",
+              "Post-order traversal",
+              "Level-order traversal"
+            ],
+            "correct_answer": "Pre-order traversal"
+          },
+          {
+            "question": "What is the time complexity of searching for an element in a binary tree?",
+            "options": [
+              "O(n)",
+              "O(log n)",
+              "O(1)",
+              "O(n^2)"
+            ],
+            "correct_answer": "O(n)"
+          },
+          {
+            "question": "What is a complete binary tree?",
+            "options": [
+              "A binary tree where all levels are fully filled except possibly the last, which is filled from left to right",
+              "A binary tree where every node has 2 children",
+              "A binary tree where all leaves are at the same level",
+              "A binary tree with the maximum number of nodes"
+            ],
+            "correct_answer": "A binary tree where all levels are fully filled except possibly the last, which is filled from left to right"
+          },
+          {
+            "question": "Which traversal method processes nodes level by level?",
+            "options": [
+              "Level-order traversal",
+              "Pre-order traversal",
+              "In-order traversal",
+              "Post-order traversal"
+            ],
+            "correct_answer": "Level-order traversal"
+          },
+          {
+            "question": "What is a leaf node in a binary tree?",
+            "options": [
+              "A node with no children",
+              "A node with two children",
+              "A node with one child",
+              "The root node"
+            ],
+            "correct_answer": "A node with no children"
+          },
+          {
+            "question": "What is a binary search tree (BST)?",
+            "options": [
+              "A binary tree where the left child is less than the parent, and the right child is greater",
+              "A binary tree where all nodes have the same value",
+              "A binary tree where the height is always balanced",
+              "A binary tree where each level is completely filled"
+            ],
+            "correct_answer": "A binary tree where the left child is less than the parent, and the right child is greater"
+          },
+          {
+            "question": "What is the time complexity for inserting an element into a balanced binary tree?",
+            "options": [
+              "O(log n)",
+              "O(n)",
+              "O(1)",
+              "O(n^2)"
+            ],
+            "correct_answer": "O(log n)"
+          },
+          {
+            "question": "What is the time complexity of deleting an element in a binary search tree?",
+            "options": [
+              "O(log n)",
+              "O(n)",
+              "O(1)",
+              "O(n^2)"
+            ],
+            "correct_answer": "O(log n)"
+          },
+          {
+            "question": "What is the role of the root node in a binary tree?",
+            "options": [
+              "It is the topmost node from which all other nodes descend",
+              "It is the bottom-most node in the tree",
+              "It is a node with no children",
+              "It is a node with no parent"
+            ],
+            "correct_answer": "It is the topmost node from which all other nodes descend"
+          },
+          {
+            "question": "How is a binary tree represented in an array?",
+            "options": [
+              "Using index calculations: left child at 2*i+1, right child at 2*i+2",
+              "Using index calculations: left child at i/2, right child at (i/2)+1",
+              "Using index calculations: left child at i-1, right child at i+1",
+              "It cannot be represented in an array"
+            ],
+            "correct_answer": "Using index calculations: left child at 2*i+1, right child at 2*i+2"
+          },
+          {
+            "question": "What is the time complexity of traversing a binary tree?",
+            "options": [
+              "O(n)",
+              "O(log n)",
+              "O(1)",
+              "O(n^2)"
+            ],
+            "correct_answer": "O(n)"
+          },
+          {
+            "question": "Which traversal method processes the left subtree, then the right subtree, and finally the root?",
+            "options": [
+              "Post-order traversal",
+              "Pre-order traversal",
+              "In-order traversal",
+              "Level-order traversal"
+            ],
+            "correct_answer": "Post-order traversal"
+          },
+          {
+            "question": "What is the main disadvantage of a binary search tree?",
+            "options": [
+              "It can become unbalanced, leading to O(n) operations",
+              "It requires a lot of memory",
+              "It cannot store duplicate elements",
+              "It does not support dynamic operations"
+            ],
+            "correct_answer": "It can become unbalanced, leading to O(n) operations"
+          },
+          {
+            "question": "What is an AVL tree?",
+            "options": [
+              "A self-balancing binary search tree where the height difference between subtrees is at most 1",
+              "A binary tree where all leaves are at the same level",
+              "A binary tree where all nodes have the same value",
+              "A binary search tree with no balancing mechanism"
+            ],
+            "correct_answer": "A self-balancing binary search tree where the height difference between subtrees is at most 1"
+          }
+        ]
+      }
+
+    ]
+  }
+  

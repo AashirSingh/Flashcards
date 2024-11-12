@@ -1,0 +1,404 @@
+{
+    "SQL&DB": [
+      {
+        "topic": "SQL Basics",
+        "questions": [
+          {
+            "question": "What does SQL stand for?",
+            "options": [
+              "Structured Query Language",
+              "Simple Query List",
+              "Standard Query Layout",
+              "Systematic Query Logic"
+            ],
+            "correct_answer": "Structured Query Language"
+          },
+          {
+            "question": "Which SQL statement is used to retrieve data from a database?",
+            "options": [
+              "GET",
+              "SELECT",
+              "RETRIEVE",
+              "FETCH"
+            ],
+            "correct_answer": "SELECT"
+          },
+          {
+            "question": "Which clause is used to filter records in a SQL query?",
+            "options": [
+              "WHERE",
+              "FILTER",
+              "ORDER BY",
+              "LIMIT"
+            ],
+            "correct_answer": "WHERE"
+          },
+          {
+            "question": "What keyword is used to sort the result-set in ascending or descending order?",
+            "options": [
+              "ORDER BY",
+              "SORT",
+              "GROUP BY",
+              "ARRANGE"
+            ],
+            "correct_answer": "ORDER BY"
+          },
+          {
+            "question": "Which SQL statement is used to update data in a table?",
+            "options": [
+              "CHANGE",
+              "MODIFY",
+              "UPDATE",
+              "EDIT"
+            ],
+            "correct_answer": "UPDATE"
+          },
+          {
+            "question": "What command is used to remove a table from a database?",
+            "options": [
+              "DELETE TABLE",
+              "DROP TABLE",
+              "REMOVE TABLE",
+              "ERASE TABLE"
+            ],
+            "correct_answer": "DROP TABLE"
+          },
+          {
+            "question": "What is the correct SQL syntax to create a new database?",
+            "options": [
+              "CREATE NEW DATABASE dbname",
+              "CREATE DATABASE dbname",
+              "NEW DATABASE dbname",
+              "DATABASE CREATE dbname"
+            ],
+            "correct_answer": "CREATE DATABASE dbname"
+          },
+          {
+            "question": "Which SQL statement is used to delete data from a database?",
+            "options": [
+              "REMOVE",
+              "DELETE",
+              "ERASE",
+              "CLEAR"
+            ],
+            "correct_answer": "DELETE"
+          },
+          {
+            "question": "Which SQL function is used to return the number of records in a table?",
+            "options": [
+              "COUNT()",
+              "SUM()",
+              "TOTAL()",
+              "NUMBER()"
+            ],
+            "correct_answer": "COUNT()"
+          },
+          {
+            "question": "What is a primary key?",
+            "options": [
+              "A unique identifier for a table row",
+              "A foreign key in a table",
+              "A column used for sorting data",
+              "A key used for encryption"
+            ],
+            "correct_answer": "A unique identifier for a table row"
+          },
+          {
+            "question": "Which command is used to add a new column to an existing table?",
+            "options": [
+              "ALTER TABLE table_name ADD column_name",
+              "ADD COLUMN table_name column_name",
+              "MODIFY TABLE table_name ADD column_name",
+              "INSERT COLUMN table_name column_name"
+            ],
+            "correct_answer": "ALTER TABLE table_name ADD column_name"
+          },
+          {
+            "question": "What is the purpose of the DISTINCT keyword in SQL?",
+            "options": [
+              "To filter duplicate records",
+              "To sort data",
+              "To group records",
+              "To join tables"
+            ],
+            "correct_answer": "To filter duplicate records"
+          },
+          {
+            "question": "Which SQL statement is used to create a table?",
+            "options": [
+              "MAKE TABLE",
+              "CREATE TABLE",
+              "NEW TABLE",
+              "INSERT TABLE"
+            ],
+            "correct_answer": "CREATE TABLE"
+          },
+          {
+            "question": "What does the LIKE operator do in SQL?",
+            "options": [
+              "Compares data equality",
+              "Filters results based on pattern matching",
+              "Sorts data in ascending order",
+              "Adds a new column"
+            ],
+            "correct_answer": "Filters results based on pattern matching"
+          },
+          {
+            "question": "Which of the following is a DML command?",
+            "options": [
+              "CREATE",
+              "DROP",
+              "INSERT",
+              "ALTER"
+            ],
+            "correct_answer": "INSERT"
+          },
+          {
+            "question": "What is the difference between DELETE and TRUNCATE?",
+            "options": [
+              "DELETE removes specific rows, TRUNCATE removes all rows",
+              "DELETE removes all rows, TRUNCATE removes specific rows",
+              "DELETE removes the table, TRUNCATE deletes the database",
+              "DELETE removes rows without logging, TRUNCATE logs removals"
+            ],
+            "correct_answer": "DELETE removes specific rows, TRUNCATE removes all rows"
+          },
+          {
+            "question": "Which SQL keyword is used to combine rows from two or more tables?",
+            "options": [
+              "COMBINE",
+              "JOIN",
+              "MERGE",
+              "UNION"
+            ],
+            "correct_answer": "JOIN"
+          },
+          {
+            "question": "What is a foreign key?",
+            "options": [
+              "A key that uniquely identifies each record in a table",
+              "A key used to link two tables together",
+              "A key that encrypts data",
+              "A key used to sort data"
+            ],
+            "correct_answer": "A key used to link two tables together"
+          },
+          {
+            "question": "Which SQL statement is used to create an index on a table?",
+            "options": [
+              "ADD INDEX",
+              "CREATE INDEX",
+              "NEW INDEX",
+              "MAKE INDEX"
+            ],
+            "correct_answer": "CREATE INDEX"
+          },
+          {
+            "question": "What is the purpose of the GROUP BY clause?",
+            "options": [
+              "To group rows that have the same values in specified columns",
+              "To sort rows in ascending order",
+              "To delete duplicate rows",
+              "To update existing rows"
+            ],
+            "correct_answer": "To group rows that have the same values in specified columns"
+          }
+        ]
+      },
+      {
+        "topic": "Primary Keys and Unique Constraints",
+        "questions": [
+          {
+            "question": "What is the purpose of a primary key?",
+            "options": [
+              "To uniquely identify each record in a table",
+              "To link two tables together",
+              "To define data types in a table",
+              "To sort the records in a table"
+            ],
+            "correct_answer": "To uniquely identify each record in a table"
+          },
+          {
+            "question": "Can a table have more than one primary key?",
+            "options": [
+              "Yes, any number of primary keys are allowed",
+              "No, a table can have only one primary key",
+              "Yes, but only if they are composite keys",
+              "No, but multiple unique keys are allowed"
+            ],
+            "correct_answer": "No, a table can have only one primary key"
+          },
+          {
+            "question": "What is a unique constraint?",
+            "options": [
+              "A rule that each value in a column must be unique",
+              "A rule that ensures data integrity",
+              "A key that links two tables",
+              "A primary key that is used across multiple tables"
+            ],
+            "correct_answer": "A rule that each value in a column must be unique"
+          },
+          {
+            "question": "What happens if you try to insert a duplicate value in a column with a UNIQUE constraint?",
+            "options": [
+              "The value will be overwritten",
+              "An error will be thrown",
+              "The value will be ignored",
+              "The column will accept the value"
+            ],
+            "correct_answer": "An error will be thrown"
+          },
+          {
+            "question": "What is a composite primary key?",
+            "options": [
+              "A primary key consisting of multiple columns",
+              "A unique key used in a foreign table",
+              "A key that changes values over time",
+              "A backup key used in case of failure"
+            ],
+            "correct_answer": "A primary key consisting of multiple columns"
+          },
+          {
+            "question": "Can a primary key column contain NULL values?",
+            "options": [
+              "Yes, it can contain multiple NULL values",
+              "No, a primary key cannot contain NULL values",
+              "Yes, but only one NULL value is allowed",
+              "No, but a UNIQUE column can contain NULL values"
+            ],
+            "correct_answer": "No, a primary key cannot contain NULL values"
+          },
+          {
+            "question": "Which statement is true about unique constraints?",
+            "options": [
+              "They allow duplicate values",
+              "They can contain NULL values",
+              "They cannot be combined with primary keys",
+              "They are used only for indexing"
+            ],
+            "correct_answer": "They can contain NULL values"
+          },
+          {
+            "question": "How is a unique constraint different from a primary key?",
+            "options": [
+              "Primary keys must be unique and cannot be NULL, unique constraints allow NULLs",
+              "Unique constraints can contain duplicate values",
+              "Primary keys are used for indexing",
+              "Primary keys and unique constraints are identical"
+            ],
+            "correct_answer": "Primary keys must be unique and cannot be NULL, unique constraints allow NULLs"
+          },
+          {
+            "question": "What is the maximum number of unique constraints allowed in a table?",
+            "options": [
+              "1",
+              "5",
+              "255",
+              "Unlimited"
+            ],
+            "correct_answer": "Unlimited"
+          },
+          {
+            "question": "Can a unique constraint be used on multiple columns?",
+            "options": [
+              "No, unique constraints can be applied to a single column only",
+              "Yes, unique constraints can be applied to a combination of columns",
+              "No, only primary keys can use multiple columns",
+              "Yes, but only if the columns are foreign keys"
+            ],
+            "correct_answer": "Yes, unique constraints can be applied to a combination of columns"
+          },
+          {
+            "question": "What is the difference between a primary key and a unique key?",
+            "options": [
+              "Primary key is for linking tables, unique key is for sorting",
+              "Primary key cannot be NULL, unique key can be",
+              "Primary key can contain duplicate values, unique key cannot",
+              "There is no difference"
+            ],
+            "correct_answer": "Primary key cannot be NULL, unique key can be"
+          },
+          {
+            "question": "Can a table have both a primary key and a unique constraint?",
+            "options": [
+              "No, it can have only one of them",
+              "Yes, but they must be on the same column",
+              "Yes, they can be on different columns",
+              "No, it is not allowed by SQL standard"
+            ],
+            "correct_answer": "Yes, they can be on different columns"
+          },
+          {
+            "question": "Which SQL keyword is used to enforce a unique constraint on a column?",
+            "options": [
+              "PRIMARY",
+              "UNIQUE",
+              "KEY",
+              "DISTINCT"
+            ],
+            "correct_answer": "UNIQUE"
+          },
+          {
+            "question": "What is the purpose of a foreign key constraint?",
+            "options": [
+              "To ensure that each record is unique",
+              "To maintain referential integrity between tables",
+              "To store encrypted data",
+              "To create indexes on tables"
+            ],
+            "correct_answer": "To maintain referential integrity between tables"
+          },
+          {
+            "question": "How many primary keys can be defined in a single table?",
+            "options": [
+              "One",
+              "Two",
+              "Unlimited",
+              "None"
+            ],
+            "correct_answer": "One"
+          },
+          {
+            "question": "Can a unique key be a foreign key?",
+            "options": [
+              "No, a unique key cannot be referenced",
+              "Yes, a unique key can be referenced as a foreign key",
+              "No, only primary keys can be foreign keys",
+              "Yes, but only if it contains NULL values"
+            ],
+            "correct_answer": "Yes, a unique key can be referenced as a foreign key"
+          },
+          {
+            "question": "Which command is used to remove a unique constraint from a table?",
+            "options": [
+              "ALTER TABLE table_name DROP UNIQUE (column_name)",
+              "DELETE UNIQUE FROM table_name",
+              "REMOVE CONSTRAINT FROM table_name",
+              "DROP TABLE UNIQUE column_name"
+            ],
+            "correct_answer": "ALTER TABLE table_name DROP UNIQUE (column_name)"
+          },
+          {
+            "question": "What is the main use of a unique key in a database?",
+            "options": [
+              "To uniquely identify each row",
+              "To enforce data uniqueness across rows",
+              "To provide a default value for rows",
+              "To define foreign relationships"
+            ],
+            "correct_answer": "To enforce data uniqueness across rows"
+          },
+          {
+            "question": "How is a unique key different from a foreign key?",
+            "options": [
+              "Unique key is for linking, foreign key is for indexing",
+              "Unique key enforces uniqueness, foreign key enforces referential integrity",
+              "There is no difference",
+              "Foreign key is always NULL, unique key cannot be NULL"
+            ],
+            "correct_answer": "Unique key enforces uniqueness, foreign key enforces referential integrity"
+          }
+        ]
+      }
+    ]
+  }

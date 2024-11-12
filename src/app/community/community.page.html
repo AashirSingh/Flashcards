@@ -8,20 +8,20 @@
   <!-- Streak Information -->
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Your Streak</ion-card-title>
+      <ion-card-title>Current Daily Streak 📈</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <h2>{{ streak }} day(s)</h2>
+      <h2>🔥{{ streak }} {{ streak > 1 ? 'days' : 'day' }}</h2>
     </ion-card-content>
   </ion-card>
 
   <!-- Personal Best Information -->
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Your Personal Best Streak</ion-card-title>
+      <ion-card-title>Personal Best 🎉</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <h2>{{ personalBest }} day(s)</h2> <!-- Display the personal best streak -->
+      <h2>🔥{{ personalBest }} {{ personalBest > 1 ? 'days' : 'day' }}</h2>
     </ion-card-content>
   </ion-card>
 
@@ -30,7 +30,11 @@
     <ion-card-header>
       <ion-card-title>Leaderboard</ion-card-title>
     </ion-card-header>
-    <ion-card-content>
+    <ion-card-content class="leaderboard-container">
+      <!-- Placeholder for future leaderboard -->
+      <div class="overlay">
+        <h2>🚧 Leaderboards Coming Soon! 🚧</h2>
+      </div>
       <canvas baseChart
               [data]="chartData"
               [options]="chartOptions"
@@ -38,4 +42,4 @@
       </canvas>
     </ion-card-content>
   </ion-card>
-</ion-content>
+  
