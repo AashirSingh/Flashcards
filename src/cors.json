@@ -1,0 +1,8 @@
+[
+  {
+    "origin": ["http://localhost:8100", "https://bookings-2bd51.web.app"],
+    "method": ["GET", "POST"],
+    "maxAgeSeconds": 3600,
+    "responseHeader": ["Content-Type", "Access-Control-Allow-Origin"]
+  }
+]

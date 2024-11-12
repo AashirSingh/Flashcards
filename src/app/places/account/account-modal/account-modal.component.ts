@@ -19,11 +19,14 @@ export class AccountModalContent {
 
   submit() {
     if (this.firstName && this.lastName && this.email) {
-      this.modalCtrl.dismiss({
-        firstName: this.firstName,
-        lastName: this.lastName,
-        email: this.email,
-      });
+      this.modalCtrl.dismiss(
+        {
+          firstName: this.firstName,
+          lastName: this.lastName,
+          email: this.email,
+        },
+        'confirm' // Add the 'confirm' role here
+      );
     }
   }
 }

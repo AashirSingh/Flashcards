@@ -14,13 +14,13 @@
     <!-- Display the multiple-choice options -->
     <ion-list>
       <ion-radio-group [(ngModel)]="selectedOption">
-        <ion-item *ngFor="let option of options">
+        <ion-item *ngFor="let option of options" (click)="selectOption(option)">
           <ion-label>{{ option }}</ion-label>
-          <ion-radio slot="start" [value]="option" (ionSelect)="selectOption(option)"></ion-radio>
+          <ion-radio slot="start" [value]="option"></ion-radio>
         </ion-item>
       </ion-radio-group>
     </ion-list>
-
+    
     <!-- Button to proceed to the next question -->
     <ion-button expand="block" color="primary" [disabled]="!selectedOption" (click)="nextQuestion()">
       Next

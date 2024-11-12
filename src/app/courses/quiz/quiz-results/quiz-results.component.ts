@@ -1,30 +1,51 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import confetti from 'canvas-confetti';
 
 @Component({
   selector: 'app-quiz-results',
-  template: `
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Quiz Results</ion-title>
-        <ion-buttons slot="end">
-          <ion-button (click)="close()">Close</ion-button>
-        </ion-buttons>
-      </ion-toolbar>
-    </ion-header>
-
-    <ion-content class="ion-padding">
-      <h2>Your Score: {{ correctAnswers }} / {{ totalQuestions }}</h2>
-    </ion-content>
-  `
+  templateUrl: './quiz-results.component.html',
+  styleUrls: ['./quiz-results.component.scss']
 })
-export class QuizResultsComponent {
+export class QuizResultsComponent implements OnInit {
   @Input() correctAnswers: number = 0;
   @Input() totalQuestions: number = 0;
 
   constructor(private modalCtrl: ModalController) {}
 
-  close() {
+  ngOnInit(): void {
+    if (this.passedQuiz()) {
+      this.launchConfetti();
+    }
+  }
+
+  passedQuiz(): boolean {
+    return this.correctAnswers / this.totalQuestions >= 0.7; // Pass if 70% or more correct
+  }
+
+  launchConfetti(): void {
+    const duration = 3 * 1000;
+    const animationEnd = Date.now() + duration;
+    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+    function randomInRange(min: number, max: number) {
+      return Math.random() * (max - min) + min;
+    }
+
+    const interval: ReturnType<typeof setInterval> = setInterval(() => {
+      const timeLeft = animationEnd - Date.now();
+
+      if (timeLeft <= 0) {
+        return clearInterval(interval);
+      }
+
+      const particleCount = 50 * (timeLeft / duration);
+      confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
+      confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
+    }, 250);
+  }
+
+  close(): void {
     this.modalCtrl.dismiss();
   }
 }

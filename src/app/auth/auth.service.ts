@@ -253,12 +253,32 @@ export class AuthService implements OnDestroy {
   }
 
   updateAccountDetails(userId: string, firstName: string, lastName: string, email: string): Observable<void> {
-    return from(this.firestore.collection('users').doc(userId).update({
+    // Step 1: Update Firestore with new details
+    const firestoreUpdate$ = from(this.firestore.collection('users').doc(userId).update({
       firstName: firstName,
       lastName: lastName,
       email: email
-    })).pipe(
+    }));
+  
+    // Step 2: Update Firebase Authentication email if it has changed
+    const authUpdate$ = from(this.afAuth.currentUser).pipe(
+      switchMap((user) => {
+        if (user && user.email !== email) {
+          return from(user.updateEmail(email)); // Firebase Authentication method to update email
+        } else {
+          return of(null); // No need to update if the email hasn't changed
+        }
+      }),
+      map(() => {
+        return; // Convert `null` to `void` so the type matches
+      })
+    );
+  
+    // Execute both updates and refresh local user state
+    return firestoreUpdate$.pipe(
+      switchMap(() => authUpdate$),
       tap(() => {
+        // Refresh the local user state
         this._user.pipe(take(1)).subscribe(user => {
           if (user) {
             const updatedUser = new User(
@@ -271,12 +291,14 @@ export class AuthService implements OnDestroy {
               user.role
             );
             this._user.next(updatedUser);
+            // Update local storage to persist the changes
+            this.storeAuthData(user.id, user.token!, user.tokenExpirationDate.toISOString(), email, firstName, lastName, user.role);
           }
         });
       })
     );
-  }
-
+  }  
+  
   private storeAuthData(
     userId: string,
     token: string,

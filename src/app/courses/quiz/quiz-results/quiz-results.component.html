@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-title>Quiz Results</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="dismiss()">Close</ion-button>
+      <ion-button (click)="close()">Close</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -12,11 +12,18 @@
   <p class="ion-text-center">
     You got {{ correctAnswers }} out of {{ totalQuestions }} questions correct.
   </p>
-  <div class="ion-text-center" *ngIf="passedQuiz()">
+
+  <!-- Display trophy and confetti if passed, otherwise display alternate icon/message -->
+  <div *ngIf="passedQuiz(); else betterLuck">
     <ion-icon name="trophy" color="warning" style="font-size: 48px;"></ion-icon>
-    <h3>Congratulations, you passed!</h3>
+    <h3 class="ion-text-center">Congratulations, you passed!</h3>
   </div>
-  <div class="ion-text-center" *ngIf="!passedQuiz()">
-    <h3>Better luck next time!</h3>
-  </div>
+
+  <!-- Better luck message with alternate icon -->
+  <ng-template #betterLuck>
+    <div class="ion-text-center">
+      <ion-icon name="sad-outline" color="medium" style="font-size: 48px;"></ion-icon>
+      <h3>Better luck next time!</h3>
+    </div>
+  </ng-template>
 </ion-content>

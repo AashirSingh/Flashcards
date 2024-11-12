@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { CoursePopupComponent } from '../course-popup/course-popup.component';
+import { CoursePopupComponent } from '../../discover/course-popup/course-popup.component';
 
 @Component({
   selector: 'app-categories',
@@ -8,7 +8,7 @@ import { CoursePopupComponent } from '../course-popup/course-popup.component';
   styleUrls: ['./categories.component.scss'],
 })
 export class CategoriesComponent implements OnInit {
-  categories = ['Art', 'Technology', 'Language'];
+  categories = ['🖌️ Art', '💻 Technology', '🌐 Language'];
   selectedCategory: string = '';
   courses: string[] = [];
   courseIds: { [key: string]: number } = {}; // Holds course names and their corresponding IDs
@@ -25,13 +25,13 @@ export class CategoriesComponent implements OnInit {
 
   loadCourses() {
     switch (this.selectedCategory) {
-      case 'Art':
+      case '🖌️ Art':
         this.courses = ['3D Modeling'];
         break;
-      case 'Technology':
-        this.courses = ['Algorithms', 'Databases', '3D Modeling'];
+      case '💻 Technology':
+        this.courses = ['Algorithms', 'Databases', '3D Modeling', 'Python 1A'];
         break;
-      case 'Language':
+      case '🌐 Language':
         this.courses = ['Sanskrit'];
         break;
       default:
@@ -42,17 +42,18 @@ export class CategoriesComponent implements OnInit {
 
   loadCourseIds() {
     switch (this.selectedCategory) {
-      case 'Art':
+      case '🖌️ Art':
         this.courseIds = { '3D Modeling': 3 };
         break;
-      case 'Technology':
+      case '💻 Technology':
         this.courseIds = {
           'Algorithms': 1,
           'Databases': 2,
-          '3D Modeling': 3 // Keeping the same ID for "3D Modeling" as in Art
+          '3D Modeling': 3, // Keeping the same ID for "3D Modeling" as in Art
+          'Python 1A': 5, // Assign a unique ID
         };
         break;
-      case 'Language':
+      case '🌐 Language':
         this.courseIds = { 'Sanskrit': 4 };
         break;
       default:
@@ -83,6 +84,8 @@ export class CategoriesComponent implements OnInit {
         return 'Master SQL and understand how databases work.';
       case 'Sanskrit':
         return 'Learn the basics of Sanskrit letters and pronunciation.';
+      case 'Python 1A':
+        return 'Introduction to Python programming for beginners.';
       default:
         return 'Course details go here.';
     }
@@ -96,11 +99,11 @@ export class CategoriesComponent implements OnInit {
 
   getIconForCategory(category: string): string {
     switch (category) {
-      case 'Art':
+      case '🖌️ Art':
         return 'brush-outline';
-      case 'Technology':
+      case '💻 Technology':
         return 'desktop-outline';
-      case 'Language':
+      case '🌐 Language':
         return 'language-outline';
       default:
         return 'book-outline'; // Fallback icon if no match found

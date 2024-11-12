@@ -11,6 +11,10 @@
     </ion-toolbar>
   </ion-header>
 
+  <div *ngIf="loading" class="loading-overlay">
+    <ion-spinner></ion-spinner>
+  </div>
+
   <div style="max-width: 600px; margin: 0 auto; padding: 16px;">
     <!-- Profile Picture Component -->
     <app-profile-picture></app-profile-picture>
@@ -18,7 +22,7 @@
     <!-- Edit Account Details Button -->
     <ion-button expand="full" color="primary" (click)="openEditAccountModal()">
       <ion-icon name="create-outline" slot="start"></ion-icon>
-      Edit Account Details
+      Edit Profile
     </ion-button>
   </div>
 </ion-content>
