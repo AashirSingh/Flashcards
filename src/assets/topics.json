@@ -60,4 +60,11 @@
       "topics": [
         { "title": "Variables: Introduction to Strings, Integers, Floats, and Booleans" },
         { "title": "Print Statements and Combining Different Data Types" },
-        { "title": "Data Type Conversion and Operato
+        { "title": "Data Type Conversion and Operators" },
+        { "title": "Input Statements and If Conditions" },
+        { "title": "Useful Python Functions and Math Operations" },
+        { "title": "Loops in Python" }
+      ]
+    }
+  ]
+}
