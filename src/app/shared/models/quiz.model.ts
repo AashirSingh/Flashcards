@@ -10,5 +10,5 @@ export interface Topic {
 }
 
 export interface QuizData {
-  Python1A: Topic[];
+  [courseId: number]: Topic[];
 }

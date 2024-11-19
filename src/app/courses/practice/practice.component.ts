@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+// Updated PracticeComponent
+import { Component, OnInit, Input } from '@angular/core';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { ModalController } from '@ionic/angular';
 import { WriteModalComponent } from '../../dashboard/flashcard/write-modal/write-modal.component';
 import { Howl } from 'howler';
@@ -22,37 +22,45 @@ export class PracticeComponent implements OnInit {
 
   constructor(
     private modalController: ModalController,
-    private route: ActivatedRoute,
-    private http: HttpClient
+    private storage: AngularFireStorage
   ) {}
 
   ngOnInit(): void {
-    this.loadPracticeQuestionsFromJson();
+    this.loadPracticeQuestionsFromFirebase();
   }
 
-  loadPracticeQuestionsFromJson(): void {
-    this.http.get<QuizData>('/assets/python1A.json').subscribe(
-      (data: QuizData) => {
-        // Access the first topic's questions for demonstration purposes
-        if (data.Python1A && data.Python1A.length > 0) {
-          this.questions = data.Python1A[0].questions;
-          console.log("Practice questions loaded:", this.questions);
-          this.checkIfSanskritCourse(); // Check if the current course is Sanskrit
-        } else {
-          console.warn("No practice questions available in JSON data.");
-        }
+  loadPracticeQuestionsFromFirebase(): void {
+    if (!this.courseId) {
+      console.error('Course ID is not provided.');
+      return;
+    }
+
+    const filePath = `json/${this.courseId}.json`;
+    const fileRef = this.storage.ref(filePath);
+
+    fileRef.getDownloadURL().subscribe(
+      (url: string) => {
+        fetch(url)
+          .then((response) => response.json())
+          .then((data: any) => {
+            if (this.courseId && data[this.courseId] && data[this.courseId].length > 0) {
+              this.questions = data[this.courseId][0].questions;
+              this.checkIfSanskritCourse();
+            } else {
+              console.warn('No practice questions available in JSON data.');
+            }
+          });
       },
-      (error) => {
-        console.error("Error loading JSON file:", error);
+      (error: any) => {
+        console.error('Error loading JSON file from Firebase:', error);
       }
     );
   }
 
   checkIfSanskritCourse(): void {
-    // Assuming that you can add some logic here to determine if the course is Sanskrit
-    if (this.courseId === 'sanskrit') { // Replace with proper identification logic
+    if (this.courseId === 'sanskrit') {
       this.isSanskritCourse = true;
-      this.loadSound(); // Load sound for Sanskrit course
+      this.loadSound();
     }
   }
 
@@ -60,18 +68,8 @@ export class PracticeComponent implements OnInit {
     this.sound = new Howl({
       src: 'assets/sounds/4209177_livepiano__01c0_om-elo.wav',
       html5: true,
-      onload: () => {
-        console.log("Sound loaded successfully");
-      },
-      onplayerror: (error: any) => {
-        console.error("Error while trying to play the sound:", error);
-      },
-      onplay: () => {
-        console.log("Sound is playing");
-      },
-      onloaderror: (error: any) => {
-        console.error("Failed to load sound:", error);
-      }
+      onload: () => console.log('Sound loaded successfully'),
+      onplayerror: (error: any) => console.error('Error while trying to play the sound:', error)
     });
   }
 

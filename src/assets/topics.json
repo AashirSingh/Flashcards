@@ -4,6 +4,7 @@
       "id": 2,
       "name": "Data Structures & Algorithms",
       "description": "Learn about various data structures and algorithms.",
+      "filePath": "json/dsa.json",
       "topics": [
         { "title": "Linked Lists" },
         { "title": "Stacks" },
@@ -16,6 +17,7 @@
       "id": 3,
       "name": "SQL & Databases",
       "description": "Master SQL and understand how databases work.",
+      "filePath": "json/sql.json",
       "topics": [
         { "title": "SQL Basics" },
         { "title": "Primary Keys and Unique Constraints" },
@@ -28,6 +30,7 @@
       "id": 4,
       "name": "Sanskrit",
       "description": "Learn the basics of Sanskrit letters and pronunciation.",
+      "filePath": "json/sanskrit.json",
       "topics": [
         { "title": "Devanagari Script" },
         { "title": "Vowels in Sanskrit" },
@@ -40,6 +43,7 @@
       "id": 5,
       "name": "3D Modeling",
       "description": "Master 3D modeling basics with hands-on projects. Learn to create, texture, and render stunning 3D objects using industry tools.",
+      "filePath": "json/3dmodeling.json",
       "topics": [
         { "title": "Introduction to 3D Modeling" },
         { "title": "Texturing Techniques" },
@@ -52,14 +56,8 @@
       "id": 6,
       "name": "Python 1A",
       "description": "Introduction to Python programming for beginners.",
+      "filePath": "json/python1a.json",
       "topics": [
         { "title": "Variables: Introduction to Strings, Integers, Floats, and Booleans" },
         { "title": "Print Statements and Combining Different Data Types" },
-        { "title": "Data Type Conversion and Operators" },
-        { "title": "Input Statements and If Conditions" },
-        { "title": "Useful Python Functions and Math Operations" },
-        { "title": "Loops in Python" }
-      ]
-    }
-  ]
-}
+        { "title": "Data Type Conversion and Operato

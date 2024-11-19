@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+// Updated QuizComponent
+import { Component, OnInit, Input } from '@angular/core';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { ModalController } from '@ionic/angular';
 import { QuizResultsComponent } from './quiz-results/quiz-results.component';
-import { Question, Topic, QuizData } from '../../shared/models/quiz.model'; // Import interfaces
+import { Question, QuizData } from '../../shared/models/quiz.model';
 
 @Component({
   selector: 'app-quiz',
@@ -10,6 +11,7 @@ import { Question, Topic, QuizData } from '../../shared/models/quiz.model'; // I
   styleUrls: ['./quiz.component.scss']
 })
 export class QuizComponent implements OnInit {
+  @Input() courseId?: string;
   questions: Question[] = []; // Array to hold questions
   currentQuestionIndex = 0; // Index for the current question
   options: string[] = []; // Options for the current question
@@ -19,33 +21,42 @@ export class QuizComponent implements OnInit {
   correctAnswersCount = 0; // Tracks correct answers
 
   constructor(
-    private http: HttpClient,
+    private storage: AngularFireStorage,
     private modalCtrl: ModalController
   ) {}
 
   ngOnInit(): void {
-    this.loadQuestionsFromJson();
+    this.loadQuestionsFromFirebase();
   }
 
-  // Load questions from JSON file
-  loadQuestionsFromJson(): void {
-    this.http.get<QuizData>('/assets/python1A.json').subscribe(
-      (data: QuizData) => {
-        // Access the first topic's questions for demonstration purposes
-        if (data.Python1A && data.Python1A.length > 0) {
-          this.questions = data.Python1A[0].questions;
-          this.loadCurrentQuestionOptions();
-        } else {
-          console.warn("No questions available in JSON data.");
-        }
+  loadQuestionsFromFirebase(): void {
+    if (!this.courseId) {
+      console.error('Course ID is not provided.');
+      return;
+    }
+
+    const filePath = `json/${this.courseId}.json`;
+    const fileRef = this.storage.ref(filePath);
+
+    fileRef.getDownloadURL().subscribe(
+      (url: string) => {
+        fetch(url)
+          .then((response) => response.json())
+          .then((data: any) => {
+            if (this.courseId && data[this.courseId] && data[this.courseId].length > 0) {
+              this.questions = data[this.courseId][0].questions;
+              this.loadCurrentQuestionOptions();
+            } else {
+              console.warn('No questions available in JSON data.');
+            }
+          });
       },
-      (error) => {
-        console.error("Error loading JSON file:", error);
+      (error: any) => {
+        console.error('Error loading JSON file from Firebase:', error);
       }
     );
   }
 
-  // Load options for the current question
   loadCurrentQuestionOptions(): void {
     if (this.questions.length > 0 && this.questions[this.currentQuestionIndex]) {
       const currentQuestion = this.questions[this.currentQuestionIndex];
@@ -56,13 +67,11 @@ export class QuizComponent implements OnInit {
     }
   }
 
-  // Handle the selection of an answer
   selectOption(option: string): void {
     this.selectedOption = option;
     this.selectionLocked = true;
   }
 
-  // Move to the next question or show results if at the end
   nextQuestion(): void {
     if (this.selectedOption === this.correctAnswer) {
       this.correctAnswersCount++;
@@ -76,7 +85,6 @@ export class QuizComponent implements OnInit {
     }
   }
 
-  // Show results in a modal at the end of the quiz
   async showResults(): Promise<void> {
     const modal = await this.modalCtrl.create({
       component: QuizResultsComponent,
